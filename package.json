@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "net": "^1.0.2",
     "next": "13.0.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "socket.io-client": "^4.5.3",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "eslint": "8.26.0",

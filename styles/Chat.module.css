@@ -1,0 +1,12 @@
+.messageContainer{
+    margin-left: 40vw;
+    width: 20vw;
+    height: 75vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.messageContainer div{
+    background-color: gainsboro;
+    padding-left: 10px;
+    height: 40px;
+}

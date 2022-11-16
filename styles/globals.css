@@ -1,6 +1,18 @@
+/* The global css file */
+:root {
+  --background-color: #202225;
+  --secondary-background-color: #1f1f20;
+  --third-background-color: #303032;
+  --white-color: #fff;
+  --primary-color: #1d9bf0;
+
+  --container-width: 126rem;
+}
+
 html,
 body {
   padding: 0;
+  overflow-y: hidden;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -9,18 +21,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
 }
 
 * {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
