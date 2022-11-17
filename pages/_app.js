@@ -39,7 +39,8 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     const user = localStorage.getItem("deso_user_key");
     if (user) {
-      setAuth(true);
+      setAuth(true); //true 
+     
     } else {
       setAuth(false);
       router.push("/home")
@@ -56,8 +57,9 @@ function App({ Component, pageProps }) {
         <>
         {auth ? (
     <SocketProvider id={roomName}>
-     
+       
       <Component {...pageProps} />
+      
       
     </SocketProvider>
         ):(

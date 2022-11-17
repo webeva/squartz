@@ -22,7 +22,7 @@ export function SocketProvider({ id, children }) {
     const roomName = router.query.id
     //Set up a new client with localhost:5000
    if(roomName){
-    const newSocket = io("http://localhost:3030", {query: `chat=${roomName}`}  );
+    const newSocket = io("Squadz-env.eba-vnv5e2ab.us-east-1.elasticbeanstalk.com", {query: `chat=${roomName}`}  );
     setSocket(newSocket);
     return () => newSocket.close();
    }

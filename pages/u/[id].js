@@ -52,6 +52,7 @@ export default function Home({data}) {
     }
     useEffect(()=>{
       setMessages(data)
+      console.log(data)
         setRoomName(router.query.id)
     }, [])
     useEffect(()=>{
@@ -88,7 +89,7 @@ export async function getServerSideProps(context) {
   const {id} = context.query;
   // Fetch data from external API
   try{
-    const res = await fetch(`http://localhost:3030/get-messages/${id}`)
+    const res = await fetch(`http://squadz-env.eba-vnv5e2ab.us-east-1.elasticbeanstalk.com/get-messages/${id}`)
     const data = await res.json()
   
     // Pass data to the page via props
