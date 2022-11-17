@@ -26,8 +26,8 @@ function App({ Component, pageProps }) {
         
       } else {
         //The user is not logged in send them to the home page.
-        setAuth(false); 
-        router.push("/home")
+        //setAuth(false); 
+        //router.push("/home")
        
       }
     }, 1000);
