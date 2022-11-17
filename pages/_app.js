@@ -3,8 +3,6 @@ import { SocketProvider } from '../contexts/socketProvider'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import NavBar from '../components/NavBar'
-import RightBar from '../components/RightBar'
 
 function App({ Component, pageProps }) {
   const router = useRouter()
