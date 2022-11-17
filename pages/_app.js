@@ -28,6 +28,7 @@ function App({ Component, pageProps }) {
         //The user is not logged in send them to the home page.
         //setAuth(false); 
         //router.push("/home")
+        setAuth(true);
        
       }
     }, 1000);
@@ -40,8 +41,9 @@ function App({ Component, pageProps }) {
       setAuth(true); //true 
      
     } else {
-      setAuth(false);
-      router.push("/home")
+      //setAuth(false);
+      setAuth(true);
+      //router.push("/home")
     }
   }, [router]);
 
