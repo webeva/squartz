@@ -89,7 +89,7 @@ export async function getServerSideProps(context) {
   const {id} = context.query;
   // Fetch data from external API
   try{
-    const res = await fetch(`http://squadz.spatiumstories.xyz/get-messages/${id}`)
+    const res = await fetch(`https://eva-gun-node.herokuapp.com/get-messages/${id}`)
     const data = await res.json()
   
     // Pass data to the page via props
