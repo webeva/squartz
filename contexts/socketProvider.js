@@ -20,9 +20,9 @@ export function SocketProvider({ id, children }) {
   useEffect(() => {
     const user = localStorage.getItem("deso_user_key");
     const roomName = router.query.id
-    //Set up a new client with localhost:5000
+    //Set up a new client with the server 
    if(roomName){
-    const newSocket = io("http://squadz-env.eba-vnv5e2ab.us-east-1.elasticbeanstalk.com/", {query: `chat=${roomName}`}  );
+    const newSocket = io("http://squadz.spatiumstories.xyz", {query: `chat=${roomName}`}  );
     setSocket(newSocket);
     return () => newSocket.close();
    }

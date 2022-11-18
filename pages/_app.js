@@ -2,7 +2,6 @@ import '../styles/globals.css'
 import { SocketProvider } from '../contexts/socketProvider'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Head from "next/head"
 
 
 function App({ Component, pageProps }) {
@@ -51,9 +50,6 @@ function App({ Component, pageProps }) {
  
   return (
    <>
-   <Head>
-   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-   </Head>
     {/* Check if the app state is currently loading */}
     {auth == "loading" ? (
         <div className="loading">Loading NFT Communities...</div>
