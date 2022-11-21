@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "deso-protocol": "^0.8.2",
     "net": "^1.0.2",
     "next": "13.0.2",
     "react": "18.2.0",
