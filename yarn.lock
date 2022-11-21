@@ -1000,15 +1000,15 @@
     "inherits" "^2.0.1"
     "minimalistic-assert" "^1.0.0"
 
-"deso-protocol-types@0.4.0":
-  "integrity" "sha512-uthZI0Uk/AztKZBK2AABNgJVH4omQWfdhvOmx2ZCCjIYd5gx7Zx9rUVAk5SmOHvlhAfp158/+87zONhGt8KwIA=="
-  "resolved" "https://registry.npmjs.org/deso-protocol-types/-/deso-protocol-types-0.4.0.tgz"
-  "version" "0.4.0"
+"deso-protocol-types@0.3.2":
+  "integrity" "sha512-eUUH5YSWBDw6H/n4EUmmbg02gPcMloNdqSJ01xerrwucYtgcysPDDc6px066MTFCPB4tMOHBEoO2Dyb904t5jg=="
+  "resolved" "https://registry.npmjs.org/deso-protocol-types/-/deso-protocol-types-0.3.2.tgz"
+  "version" "0.3.2"
 
-"deso-protocol@^0.8.2":
-  "integrity" "sha512-Ef//4XnwWeO7Bfmmbl4iszxGTqkV/ll1fDFDMJpnmHqmrqWCOaDqtmDm/ykYjm2ZHr24+fuNoMZ+QDZZb0JzTQ=="
-  "resolved" "https://registry.npmjs.org/deso-protocol/-/deso-protocol-0.8.2.tgz"
-  "version" "0.8.2"
+"deso-protocol@^0.7.18":
+  "integrity" "sha512-O6nk+H7EN+ZFaYOET4Cair83II0DWTuen4GwfuIKfhsTy+U3Gn3Brw+cqu79qwgax1zYS+jCnurDP+8yKKGoUg=="
+  "resolved" "https://registry.npmjs.org/deso-protocol/-/deso-protocol-0.7.18.tgz"
+  "version" "0.7.18"
   dependencies:
     "@types/bs58check" "^2.1.0"
     "assert" "^2.0.0"
@@ -1016,7 +1016,7 @@
     "bip39" "^3.0.4"
     "buffer" "^6.0.3"
     "crypto-browserify" "^3.12.0"
-    "deso-protocol-types" "0.4.0"
+    "deso-protocol-types" "0.3.2"
     "ethers" "^5.6.6"
     "hdkey" "github:deso-protocol/hdkey"
     "https-browserify" "^1.0.0"
