@@ -3,7 +3,7 @@ import { Context } from "../../contexts/modalsProvider"
 import { useContext } from "react"
 
 import style from "./authModal.module.css"
-export default function authModal() {
+export default function AuthModal() {
   const [show, setShow] = useContext(Context)
   return (
     <Modal show={show} hide={()=> setShow(false)} >
