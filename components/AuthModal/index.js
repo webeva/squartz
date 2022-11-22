@@ -56,6 +56,7 @@ export default function AuthModal() {
       localStorage.setItem("SquadKey", uid)
       localStorage.setItem("SquadKeyType", type)
       setShow(false)
+      setAuth(true)
       router.push("/")
 
     })

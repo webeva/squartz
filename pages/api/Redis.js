@@ -8,7 +8,7 @@ class RedisApi {
 
     async createNewUser(name, uid, type){
         try{
-            const response = await axios.post('http://localhost:3030/create-new-user/', {
+            const response = await axios.post('https://eva-gun-node.herokuapp.com/create-new-user/', {
                 Name: name,
                 UID: uid,
                 Type: type,
