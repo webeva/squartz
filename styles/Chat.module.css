@@ -10,3 +10,10 @@
     padding-left: 10px;
     height: 40px;
 }
+.messageChannel{
+    margin-left: 4.8rem;
+    background-color: var(--secondary-background-color);
+    color: var(--white-color);
+    border: none;
+    cursor: pointer;
+}

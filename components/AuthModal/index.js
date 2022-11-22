@@ -1,10 +1,68 @@
 import Modal from "../Modal"
 import { Context } from "../../contexts/modalsProvider"
+import {AuthContext }  from "../../contexts/authProvider"
 import { useContext } from "react"
 
 import style from "./authModal.module.css"
+
+import { useState } from "react"
+import { useRouter } from "next/router"
+
+import RedisApi from "../../pages/api/Redis"
+import DesoApi from "../../pages/api/Deso"
+
 export default function AuthModal() {
   const [show, setShow] = useContext(Context)
+  const [auth, setAuth] = useContext(AuthContext)
+
+  const [name, setName] = useState()
+  const [uid, setUid] = useState()
+  const [type, setType] = useState()
+
+  const redis = new RedisApi
+  const deso = new DesoApi
+
+  const router = useRouter()
+
+
+  async function login(level){
+    const response = await deso.login(level).then(()=>{
+      if(localStorage.getItem("deso_user_key")){
+        setUid(localStorage.getItem("deso_user_key"))
+        setType("DeSo")
+      }
+    })
+  }
+  async function metaMaskLogin(){
+    if (window.ethereum) {
+      try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+          const account = accounts[0]
+   
+          setUid(await window.ethereum.request({
+             method: 'eth_getEncryptionPublicKey',
+             params: [account],
+          }))
+          setType("MetaMask")
+                   
+      } catch (error) {
+          console.log({ error })
+      }
+   }
+  }
+  async function createUser(name, uid, type){
+    const response = await redis.createNewUser(name, uid, type).then(res=>{
+      document.getElementById("error").innerText = res.data
+      localStorage.setItem("SquadKey", uid)
+      localStorage.setItem("SquadKeyType", type)
+      setShow(false)
+      router.push("/")
+
+    })
+     
+    
+   
+  }
   return (
     <Modal show={show} hide={()=> setShow(false)} >
        {/* Edit inside this componenet and it should
@@ -32,6 +90,18 @@ export default function AuthModal() {
 
        I hope this makes sense, if you have any more questions 
        about nextjs I will be sure to answer.*/}
+
+
+       <input placeholder="Type in your name" type="text" onInput={(e)=>setName(e.target.value)}></input>
+       <br></br><button onClick={() => login(2)}>Connect with DeSo</button><br></br>
+       <button onClick={()=>metaMaskLogin()}>Connect with MetaMask</button>
+
+       <p>Name: {name}</p>
+       <p>UID:{uid}</p>
+
+       <button onClick={()=>createUser(name, uid, type)}>Create new user</button>
+       <p id="error"></p>
+
     </Modal>
   )
 }

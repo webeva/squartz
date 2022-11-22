@@ -22,7 +22,7 @@ function App({ Component, pageProps }) {
   the main page */
 
   useEffect(() => {
-    const user = localStorage.getItem("deso_user_key");
+    const user = localStorage.getItem("SquadKey");
     //Small delay to allow for the loading screen to load
     setTimeout(() => {
       if (user) {
@@ -45,16 +45,17 @@ function App({ Component, pageProps }) {
         <ModalState>
         {/* Check if the app state is currently loading */}
         {auth == "loading" ? (
-          <div className="loading">Loading NFT Communities...</div>
+          <div className="loading">Loading Squadz...</div>
         ) : (
           <>
             {auth ? (
               <SocketProvider id={roomName}>
+                 <TopBar />
                 <Component {...pageProps} />
               </SocketProvider>
             ) : (
               <>
-                <TopBar />
+               <TopBar />
                 <Component {...pageProps} />
               </>
             )}

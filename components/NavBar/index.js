@@ -4,9 +4,20 @@
 import style from "./navBar.module.css"
 //Import the Navitem (Commnunities)
 import NavItem from "../NavItem"
+//Import Redis api
+import RedisApi from "../../pages/api/Redis"
+import { useEffect } from "react"
+
 
 //Export the JSX
 export default function Navbar() {
+  const redis = new RedisApi()
+  async function getData(){
+    //console.log(await redis.getUserData())
+  }
+  useEffect(()=>{
+    getData()
+  }, [])
   return (
     <div className={style.menu}>
         <NavItem icon={"https://diamondapp.com/api/v0/get-single-profile-picture/BC1YLhTXEyhu4p8P8QAz8eMy6UMGrc9j6mK1xXHMKjdbv6o3q1j7WgR?fallback=https://diamondapp.com/assets/img/default_profile_pic.png"} text={"Wormals"}/> {/* Wormals Community */}

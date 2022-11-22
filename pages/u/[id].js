@@ -3,6 +3,8 @@ import { useEffect, useState} from "react";
 import style from "../../styles/Chat.module.css"
 import Link from "next/link"
 import {useRouter} from "next/router"
+
+import Navbar from "../../components/NavBar";
 export default function Home({data}) {
   const socket = useSocket();
   const router = useRouter();
@@ -64,14 +66,19 @@ export default function Home({data}) {
    
 
   return (
-    <>
-    <Link href="/u/chat1"><button>Chat 1</button></Link>
-    <Link href="/u/chat2"><button>Chat 2</button></Link>
+    <div style={{backgroundColor:"var(--third-background-color)", width:"100vw", height:"100vh"}}>
+    <Navbar></Navbar>
+    <div>
+      <Link href="/u/chat1"><button className={style.messageChannel}>Channel 1</button></Link>
+      <Link href="/u/chat2"><button className={style.messageChannel}>Channel 2</button></Link>
+    </div>
+    
+    
     <div id="messageContainer" className={style.messageContainer}>
       {messages?.length > 0 &&
         
         messages.map(function (element, index) {
-        console.log(element.message)
+        
           return (
             <div key={index}>{element.message}</div>
             
@@ -81,7 +88,7 @@ export default function Home({data}) {
     </div>
     <input  id="sendInput" style={{marginLeft:"43vw"}} placeholder="Click here" type="text"/>
     <button id="sendButton" onClick={()=> sendMessage()}>Send</button>
-    </>
+    </div>
   )
 }
 

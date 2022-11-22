@@ -11,7 +11,7 @@ export default function NavItem({ icon, text }) {
   //Return the JSX
   return (
     <div
-      onClick={() => router.push(`/channel/${text}`)}
+      onClick={() => router.push(`/u/${text}`)}
       className={style.navItem}
       style={{
         background: `url(${icon})`,

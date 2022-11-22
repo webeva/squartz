@@ -1,10 +1,10 @@
-/*import Deso from 'deso-protocol';
+import Deso from 'deso-protocol';
 
 class DesoApi {
     constructor() {
       this.client = null;
     }
-    /* ============ Login ========= 
+    /* ============ Login ========= */
     async login(request) {
       if (!request) {
         console.log("Request level required");
@@ -18,7 +18,7 @@ class DesoApi {
         return;
       }
     }
-    /* ======== Get NFTs for a user ========= 
+    /* ======== Get NFTs for a user ========= */
     async getNFTForUser(userKey) {
       if (!userKey) {
         console.log("User key required");
@@ -35,7 +35,7 @@ class DesoApi {
         return;
       }
     }
-    /* ========= Get NFTs of a certain type (Work in progress) ====== 
+    /* ========= Get NFTs of a certain type (Work in progress) ====== */
     async getNFTOf(user, nftType) {
       if (!user) {
         console.log("No user found");
@@ -52,7 +52,7 @@ class DesoApi {
         return;
       }
     }
-    /* ========== Get the messages for a certain chat ====== 
+    /* ========== Get the messages for a certain chat ====== */
     async getMessages(userkey) {
       if (!userkey) {
         console.log("Key is required");
@@ -76,11 +76,11 @@ class DesoApi {
         return null;
       }
     }
-    /* ======= Logout ========= 
+    /* ======= Logout ========= */
     async logout(user) {
       const response = await this.getClient().identity.logout(user);
     }
-    /* ========== Send a message ======= 
+    /* ========== Send a message ======= */
     async sendMessage(userkey, receiver, message, image) {
       let imageSent;
       if (!userkey) {
@@ -117,7 +117,7 @@ class DesoApi {
         return;
       }
     }
-    /* ======== Get current user's JWT ========== 
+    /* ======== Get current user's JWT ========== */
     async getJwt(user) {
       if (!user) {
         console.log("User needed");
@@ -132,7 +132,7 @@ class DesoApi {
         return;
       }
     }
-    /* ======= Upload Image ======== 
+    /* ======= Upload Image ======== */
     async uploadImage(user, JWT, result) {
       if (!result) {
         console.log("Result needed");
@@ -146,7 +146,7 @@ class DesoApi {
       const response = await this.getClient().media.uploadImage(request);
       return response;
     }
-    /* ========= Get the username from a public key ======= 
+    /* ========= Get the username from a public key ======= */
     async getUsername(userkey) {
       if (!userkey) {
         console.log("No user key");
@@ -164,7 +164,7 @@ class DesoApi {
         return;
       }
     }
-    /* ========== Get a public key from the username ======== 
+    /* ========== Get a public key from the username ======== */
     async getPublicKey(username) {
       if (!username) {
         console.log("No user key");
@@ -183,7 +183,7 @@ class DesoApi {
       }
     }
   
-    /* ======== Get Client ======= 
+    /* ======== Get Client ======= */
     getClient() {
       if (this.client) return this.client;
       this.client = new Deso();
@@ -191,4 +191,4 @@ class DesoApi {
     }
   }
   export default DesoApi;
-  */
+  
