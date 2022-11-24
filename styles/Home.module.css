@@ -1,0 +1,18 @@
+.background{
+    background-color: var(--third-background-color);
+    width: 100vw;
+    height: 100vh;
+    vertical-align: middle;
+    justify-content: center;
+    display: flex;
+    padding-top: 40vh;
+    padding-left: 200px;
+    padding-right: 200px;
+    
+  }
+  .text{
+    text-align: center;
+    color: var(--white-color);
+   
+    
+  }

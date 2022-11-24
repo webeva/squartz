@@ -1,0 +1,16 @@
+.channels{
+    width: 20vw;
+    height: 100vh;
+    background-color: #212123;
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+    left: 4.8rem;
+}
+.messageChannel{
+    margin-left: 4.8rem;
+    background-color: var(--background-color);
+    color: var(--white-color);
+    border: none;
+    cursor: pointer;
+}

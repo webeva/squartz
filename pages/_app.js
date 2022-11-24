@@ -45,7 +45,11 @@ function App({ Component, pageProps }) {
         <ModalState>
         {/* Check if the app state is currently loading */}
         {auth == "loading" ? (
-          <div className="loading">Loading Squadz...</div>
+          <div className="loading">
+            <img src="/assets/image/logo.png" ></img> 
+            
+          </div>
+          
         ) : (
           <>
             {auth ? (

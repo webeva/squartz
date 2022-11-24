@@ -5,6 +5,7 @@ import Link from "next/link"
 import {useRouter} from "next/router"
 
 import Navbar from "../../components/NavBar";
+import SideBar from "../../components/SideBar";
 export default function Home({data}) {
   const socket = useSocket();
   const router = useRouter();
@@ -66,12 +67,9 @@ export default function Home({data}) {
    
 
   return (
-    <div style={{backgroundColor:"var(--third-background-color)", width:"100vw", height:"100vh"}}>
+    <>
     <Navbar></Navbar>
-    <div>
-      <Link href="/u/chat1"><button className={style.messageChannel}>Channel 1</button></Link>
-      <Link href="/u/chat2"><button className={style.messageChannel}>Channel 2</button></Link>
-    </div>
+    <SideBar></SideBar>
     
     
     <div id="messageContainer" className={style.messageContainer}>
@@ -86,9 +84,15 @@ export default function Home({data}) {
         })
       }
     </div>
-    <input  id="sendInput" style={{marginLeft:"43vw"}} placeholder="Click here" type="text"/>
+
+
+      <div className={style.inputContainer}>
+        <input className={style.messageInput} id="sendInput" placeholder="Click here to start chatting" type="text"/>
+      </div>
+   
+
     <button id="sendButton" onClick={()=> sendMessage()}>Send</button>
-    </div>
+    </>
   )
 }
 

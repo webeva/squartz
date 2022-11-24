@@ -12,7 +12,8 @@ class RedisApi {
                 Name: name,
                 UID: uid,
                 Type: type,
-                CommunityList: ""
+                CommunityList: "",
+                Email: ""
             })
             return response
         }catch(error){

@@ -24,6 +24,7 @@ export default function Navbar() {
         <NavItem icon = {"https://images.deso.org/bda8fa59eef35225bf80a6e152314afb46e0d4c2f69623129937afd2d4d11592.webp"} text={"Seelz"}/> {/* Seelz Community */}
         <NavItem icon = {"https://diamondapp.com/api/v0/get-single-profile-picture/BC1YLhNySXmFdZDyuwT9V115PbbSB2dfx2Y4mKowBwGDYx7KDDE2Ycb?fallback=https://diamondapp.com/assets/img/default_profile_pic.png"} text={"EvaSocial"}/> {/* EvaSocial Community */}
         <NavItem icon={"https://diamondapp.com/api/v0/get-single-profile-picture/BC1YLjBvzHjemzgY4va55AzZ7VhRBLDmjxsfxRHQ9PybPARMQvtDH5N?fallback=https://diamondapp.com/assets/img/default_profile_pic.png"} text={"DeSoLabs"}/> {/* DeSoLabs Community */}
+        <div className={style.create}>Create</div>
     </div>
   )
 }
