@@ -10,7 +10,7 @@ import DesoApi from "../../pages/api/Deso";
 
 import { useRouter } from "next/router";
 
-export default function loginModal() {
+export default function LoginModal() {
     const {login} = useContext(Context)
     const [show, setShow] = login
     const [isAuth, setAuth] = useContext(AuthContext)
