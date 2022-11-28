@@ -27,7 +27,14 @@ export default function JoinModal() {
 
   async function doesOwnNft(id, adminId) {
     //Return true if id owns an adminId NFT
-    console.log(id, adminId);
+    const response = await deso.getNFTForUser(id);
+    let owns = false;
+    Object.values(response['data']['NFTsMap']).forEach((nft) => {
+      if (nft['PostEntryResponse']['PosterPublicKeyBase58Check'] === adminId) {
+        owns = true;
+      }
+    });
+    return owns;
   }
 
   async function joinCommunity() {
@@ -42,7 +49,8 @@ export default function JoinModal() {
       } else {
         const user = localStorage.getItem("deso_user_key");
         if (user) {
-          const result = doesOwnNft(user, data.Deso);
+          const result = await doesOwnNft(user, data.Deso);
+          console.log(result);
           if (result == true) {
             document.getElementById("Join").innerText = "Joining";
             const response = await redis
