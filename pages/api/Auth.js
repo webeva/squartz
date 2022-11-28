@@ -5,7 +5,7 @@ class AuthApi {
       }
   async checkLogin(type, user) {
     const uid = "$@" + type + "user" + this.SHA256(user);
-    const response = await axios.get("http://localhost:3030/check-login/" + uid)
+    const response = await axios.get("https://squadz.spatiumstories.xyz/check-login/" + uid)
     return {
       Logged: response.data,
       UID: uid

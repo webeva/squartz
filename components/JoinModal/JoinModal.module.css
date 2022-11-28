@@ -1,0 +1,52 @@
+.main {
+  text-align: center;
+  font-size: 35px;
+}
+.req {
+  text-align: center;
+  font-size: 19px;
+}
+.reqi {
+  text-align: center;
+  list-style: none;
+  padding: 0;
+}
+.reqi li {
+  padding: 0;
+  margin: 0;
+}
+.split {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50% 50%;
+}
+.image {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.des {
+  display: inline-block;
+
+  padding-left: 10px;
+}
+.bottom {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid black;
+  margin-top: 10px;
+}
+.bottom button {
+  background-color: rgba(48, 52, 69, 255);
+  outline: none;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: var(--white-color);
+  width: 120px;
+  height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+}

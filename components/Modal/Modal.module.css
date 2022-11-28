@@ -1,36 +1,37 @@
 /* ==== Css file for all of our modals/popups ==== */
-.modal{
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
-.modalContent{
-    width: 500px;
-    background-color: #fff;
-    border-radius: 10px;
+.modalContent {
+  width: 500px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: black 0px 8px 24px;
+  color: var(--white-color);
 }
-.modalHeader{
-    padding: 10px;
+.modalHeader {
+  padding: 10px;
 }
-.modalTitle{
-    margin: 0;
+.modalTitle {
+  margin: 0;
 }
-.modalBody{
-    padding: 10px;
+.modalBody {
+  padding: 10px;
 }
-.modalClose{
-    position: relative;
-    top: 0;
-    right: 0;
-    background-color: red;
-   
+.modalClose {
+  position: relative;
+  top: 0;
+  right: 0;
 }

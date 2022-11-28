@@ -1,18 +1,13 @@
 .menu {
-    position: fixed;
-    top: 13vh;
-    left: 0;
-    height: 100vh;
-    width: 4.8rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background-color: #1c1d24;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  }
-  .create{
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-  }
+  position: fixed;
+  top: 11vh;
+  left: 0;
+  height: 100vh;
+  width: 4.8rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: #1c1d24;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}

@@ -1,0 +1,66 @@
+.header {
+  color: var(--white-color);
+  text-align: center;
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 110px;
+  line-height: 0px;
+  margin-top: 15vh;
+}
+.subText {
+  color: var(--white-color);
+  text-align: center;
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 0px;
+}
+.profile {
+  width: 20vw;
+  height: 20vw;
+
+  border-radius: 8px;
+  margin-top: 2vh;
+  cursor: pointer;
+}
+.name {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.727);
+  color: var(--white-color);
+}
+.design {
+  display: inline-block;
+  margin-left: 10vw;
+  margin-top: 5vh;
+  position: relative;
+}
+.text {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: var(--white-color);
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.432);
+  height: 5vh;
+  padding-left: 10px;
+}
+.buttom {
+  position: absolute;
+  bottom: 16px;
+  left: 62%;
+  color: var(--white-color);
+  width: 100px;
+  cursor: pointer;
+  height: 5vh;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  outline: none;
+  border: none;
+  background-color: rgba(48, 52, 69, 255);
+}

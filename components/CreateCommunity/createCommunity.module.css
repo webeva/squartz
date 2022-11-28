@@ -1,0 +1,87 @@
+.text {
+  text-align: center;
+}
+.input {
+  width: 100%;
+  margin-bottom: 1vh;
+  height: 6vh;
+  padding-left: 10px;
+  outline: none;
+  border: 2px solid rgba(48, 52, 69, 255);
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: transparent;
+  color: var(--white-color);
+}
+.textarea {
+  width: 100%;
+  margin-bottom: 1vh;
+  height: 30vh;
+  outline: none;
+  border: 2px solid rgba(48, 52, 69, 255);
+  border-radius: 8px;
+  font-size: 15px;
+  padding-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  resize: none;
+  padding-top: 10px;
+  color: var(--white-color);
+  background-color: transparent;
+}
+.next {
+  background-color: rgba(48, 52, 69, 255);
+  border: none;
+  border-radius: 25px;
+  color: var(--white-color);
+  padding: 15px 40px;
+  cursor: pointer;
+  margin-left: 29vw;
+}
+.error {
+  text-align: center;
+  color: rgb(217, 62, 62);
+}
+.image {
+  border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-left: 15vw;
+  cursor: pointer;
+}
+.upload {
+  width: 80%;
+  margin-left: 4vw;
+  height: 15vh;
+  border: 1px dashed white;
+  border-radius: 5px;
+  margin-top: 2vh;
+  margin-bottom: 4vh;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+}
+.banner {
+  margin-left: 4vw;
+  width: 80%;
+  margin-bottom: 2vh;
+  border-radius: 5px;
+  display: none;
+}
+.options div {
+  cursor: pointer;
+  outline: 2px solid rgba(48, 52, 69, 255);
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  padding: 5px 5px;
+}
+.options div:hover {
+  box-shadow: rgba(48, 52, 69, 255) 5px 3px 5px;
+}
+.options div h1 {
+  font-size: 17px;
+}

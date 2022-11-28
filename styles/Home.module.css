@@ -1,18 +1,64 @@
-.background{
-    background-color: var(--third-background-color);
-    width: 100vw;
-    height: 100vh;
-    vertical-align: middle;
-    justify-content: center;
-    display: flex;
-    padding-top: 40vh;
-    padding-left: 200px;
-    padding-right: 200px;
-    
-  }
-  .text{
-    text-align: center;
-    color: var(--white-color);
-   
-    
-  }
+.background {
+  background-color: var(--third-background-color);
+  width: 100vw;
+  height: 100vh;
+  vertical-align: middle;
+  justify-content: center;
+  display: flex;
+  padding-top: 40vh;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+.text {
+  text-align: center;
+  color: var(--white-color);
+}
+.main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.left {
+  text-align: center;
+  color: var(--white-color);
+  font-size: 35px;
+  margin-top: 1vh;
+  line-height: 90px;
+}
+.left h1 {
+  position: absolute;
+  width: 480px;
+  height: 116px;
+  left: 100px;
+  top: 158px;
+
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 128px;
+  line-height: 128px;
+  /* or 100% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #ffffff;
+}
+.left h2 {
+  position: absolute;
+  width: 465px;
+  height: 116px;
+  left: 108px;
+  top: 464px;
+
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #ffffff;
+}

@@ -10,41 +10,62 @@ import { useContext } from "react";
 import { Context } from "../../contexts/modalsProvider";
 import { AuthContext } from "../../contexts/authProvider";
 
+import DesoApi from "../../pages/api/Deso";
+
 const AuthModal = dynamic(() => import("../AuthModal"), {
   suspense: true,
 });
-const LoginModal = dynamic(()=> import("../LoginModal"), {
-  suspense: true
-})
+const LoginModal = dynamic(() => import("../LoginModal"), {
+  suspense: true,
+});
+const CreateCommunity = dynamic(() => import("../CreateCommunity"), {
+  suspense: true,
+});
 
 export default function TopBar() {
-  const {modal, login} = useContext(Context)
-  const [show, setShow] = modal
-  const [loginShow, setLoginShow] = login
+  const { modal, login, community } = useContext(Context);
+  const [show, setShow] = modal;
+  const [loginShow, setLoginShow] = login;
+  const [communityShow, setCommunityShow] = community;
   const [auth, setAuth] = useContext(AuthContext);
-  const [name, setName] = useState("")
-  const router = useRouter()
+  const [name, setName] = useState("");
+  const [profile, setProfile] = useState("/assets/image/uploadPlaceholder.png");
+  const router = useRouter();
+  const deso = new DesoApi();
 
   useEffect(() => {
     const user = localStorage.getItem("SquadKey");
     if (user) {
       setAuth(true);
-      getUserData()
+      getUserData();
     } else {
       setAuth(false);
     }
   }, []);
 
-  async function getUserData(){
-    const user = localStorage.getItem("SquadKey")
-    const response = await fetch("https://eva-gun-node.herokuapp.com/get-user-info/" + user).then((response) => response.json())
-    .then((data) => setName(data.Name));
+  async function getUserData() {
+    const user = localStorage.getItem("SquadKey");
+    const response = await fetch(
+      "https://squadz.spatiumstories.xyz/get-user-info/" + user
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setName(data.Name);
+        setProfile(data.Profile);
+      });
   }
-  function logout(){
-    localStorage.removeItem("SquadKey")
-    localStorage.removeItem("SquadKeyType")
-    setAuth(false)
-    router.push("/home")
+  function logout() {
+    localStorage.removeItem("SquadKey");
+    localStorage.removeItem("SquadKeyType");
+    setAuth(false);
+    router.push("/home");
+  }
+  async function seeIfCommuniy() {
+    if (localStorage.getItem("deso_user_key")) {
+      setCommunityShow(true);
+    } else {
+      const response = await deso.login(2);
+    }
   }
 
   return (
@@ -52,6 +73,7 @@ export default function TopBar() {
       <Suspense>
         <AuthModal></AuthModal>
         <LoginModal></LoginModal>
+        <CreateCommunity></CreateCommunity>
       </Suspense>
 
       <nav className={style.nav}>
@@ -59,30 +81,33 @@ export default function TopBar() {
           className={style.logo}
           src="/assets/image/logo.png"
           alt="Logo goes here"
-          onClick={()=>router.push("/")}
+          onClick={() => router.push("/")}
         ></img>
         <ul className={style.navList}>
+          {auth ? (
+            <li className={style.navItem} onClick={() => seeIfCommuniy()}>
+              Create
+            </li>
+          ) : (
+            <div></div>
+          )}
           <li className={style.navItem}>
             <Link href="/discover">Discover</Link>
           </li>
           {auth ? (
             <>
-            <div className={style.dropContainer}>
-              <li className={style.logged}>{name}</li>
-              <div className={style.dropdown}>
-                <ul>
-                  <li>
-                    <img src="/assets/svg/setting.svg"/>
-                    Settings
-                  </li>
-                  <li onClick={()=>logout()}>
-                  <img src="/assets/svg/logout.svg"/>
-                    Log out
-                  </li>
-                </ul>
+              <div className={style.dropContainer}>
+                <img className={style.profile} src={profile}></img>
+                <li className={style.logged}>{name}</li>
+                <div className={style.dropdown}>
+                  <ul>
+                    <li onClick={() => logout()}>
+                      <img src="/assets/svg/logout.svg" />
+                      Log out
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-              
             </>
           ) : (
             <>

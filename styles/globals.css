@@ -1,4 +1,5 @@
 /* The global css file */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=Bebas+Neue&display=swap");
 :root {
   --background-color: #202225;
   --secondary-background-color: #1f1f20;
@@ -27,7 +28,7 @@ a {
 * {
   box-sizing: border-box;
 }
-.loading{
+.loading {
   width: 100vw;
   height: 100vh;
   color: var(--white-color);
@@ -36,7 +37,11 @@ a {
   justify-content: center;
   align-items: center;
   font-size: 18px;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
 }
-.loading img{
+.loading img {
   width: 20rem;
 }

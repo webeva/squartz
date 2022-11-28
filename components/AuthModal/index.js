@@ -1,196 +1,307 @@
-import Modal from "../Modal"
-import { Context } from "../../contexts/modalsProvider"
-import {AuthContext }  from "../../contexts/authProvider"
-import { useContext } from "react"
+import Modal from "../Modal";
+import { Context } from "../../contexts/modalsProvider";
+import { AuthContext } from "../../contexts/authProvider";
+import { useContext } from "react";
 
-import style from "./authModal.module.css"
+import style from "./authModal.module.css";
 
-import { useState } from "react"
-import { useRouter } from "next/router"
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-import RedisApi from "../../pages/api/Redis"
-import DesoApi from "../../pages/api/Deso"
+import RedisApi from "../../pages/api/Redis";
+import DesoApi from "../../pages/api/Deso";
 
 export default function AuthModal() {
-  const {modal} = useContext(Context)
-  const [show, setShow] = modal
-  const [auth, setAuth] = useContext(AuthContext)
+  const { modal } = useContext(Context);
+  const [show, setShow] = modal;
+  const [auth, setAuth] = useContext(AuthContext);
 
-  const [name, setName] = useState()
-  const [uid, setUid] = useState()
-  const [type, setType] = useState()
+  const [name, setName] = useState();
+  const [uid, setUid] = useState();
+  const [type, setType] = useState();
+  const [profile, setProfile] = useState();
 
-  const redis = new RedisApi
-  const deso = new DesoApi
+  const redis = new RedisApi();
+  const deso = new DesoApi();
 
-  const router = useRouter()
+  const router = useRouter();
 
-
-  async function login(level){
-    const response = await deso.login(level).then(()=>{
-      if(localStorage.getItem("deso_user_key")){
-        setUid(localStorage.getItem("deso_user_key"))
-        setType("DeSo")
+  async function login(level) {
+    const response = await deso.login(level).then(async function () {
+      if (localStorage.getItem("deso_user_key")) {
+        setUid(localStorage.getItem("deso_user_key"));
+        setType("DeSo");
+        const profilePic = await deso.getProfilePicture(
+          localStorage.getItem("deso_user_key")
+        );
+        setProfile(profilePic);
       }
-    })
+    });
   }
-  async function metaMaskLogin(){
+  async function metaMaskLogin() {
     if (window.ethereum) {
       try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-          const account = accounts[0]
-   
-          setUid(await window.ethereum.request({
-             method: 'eth_getEncryptionPublicKey',
-             params: [account],
-          }))
-          setType("MetaMask")
-                   
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const account = accounts[0];
+
+        setUid(
+          await window.ethereum.request({
+            method: "eth_getEncryptionPublicKey",
+            params: [account],
+          })
+        );
+        setType("MetaMask");
       } catch (error) {
-          console.log({ error })
+        console.log({ error });
       }
-   }
+    }
   }
   /**
-* Secure Hash Algorithm (SHA256)
-* http://www.webtoolkit.info/
-* Original code by Angel Marin, Paul Johnston
-**/
+   * Secure Hash Algorithm (SHA256)
+   * http://www.webtoolkit.info/
+   * Original code by Angel Marin, Paul Johnston
+   **/
 
-function SHA256(s){
-  var chrsz = 8;
-  var hexcase = 0;
- 
-  function safe_add (x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-  }
- 
-  function S (X, n) { return ( X >>> n ) | (X << (32 - n)); }
-  function R (X, n) { return ( X >>> n ); }
-  function Ch(x, y, z) { return ((x & y) ^ ((~x) & z)); }
-  function Maj(x, y, z) { return ((x & y) ^ (x & z) ^ (y & z)); }
-  function Sigma0256(x) { return (S(x, 2) ^ S(x, 13) ^ S(x, 22)); }
-  function Sigma1256(x) { return (S(x, 6) ^ S(x, 11) ^ S(x, 25)); }
-  function Gamma0256(x) { return (S(x, 7) ^ S(x, 18) ^ R(x, 3)); }
-  function Gamma1256(x) { return (S(x, 17) ^ S(x, 19) ^ R(x, 10)); }
- 
-  function core_sha256 (m, l) {
-  var K = new Array(0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5, 0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5, 0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3, 0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174, 0xE49B69C1, 0xEFBE4786, 0xFC19DC6, 0x240CA1CC, 0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA, 0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7, 0xC6E00BF3, 0xD5A79147, 0x6CA6351, 0x14292967, 0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13, 0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85, 0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3, 0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070, 0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5, 0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3, 0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208, 0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2);
-  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
-  var W = new Array(64);
-  var a, b, c, d, e, f, g, h, i, j;
-  var T1, T2;
- 
-  m[l >> 5] |= 0x80 << (24 - l % 32);
-  m[((l + 64 >> 9) << 4) + 15] = l;
- 
-  for ( var i = 0; i<m.length; i+=16 ) {
-  a = HASH[0];
-  b = HASH[1];
-  c = HASH[2];
-  d = HASH[3];
-  e = HASH[4];
-  f = HASH[5];
-  g = HASH[6];
-  h = HASH[7];
- 
-  for ( var j = 0; j<64; j++) {
-  if (j < 16) W[j] = m[j + i];
-  else W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
- 
-  T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
-  T2 = safe_add(Sigma0256(a), Maj(a, b, c));
- 
-  h = g;
-  g = f;
-  f = e;
-  e = safe_add(d, T1);
-  d = c;
-  c = b;
-  b = a;
-  a = safe_add(T1, T2);
-  }
- 
-  HASH[0] = safe_add(a, HASH[0]);
-  HASH[1] = safe_add(b, HASH[1]);
-  HASH[2] = safe_add(c, HASH[2]);
-  HASH[3] = safe_add(d, HASH[3]);
-  HASH[4] = safe_add(e, HASH[4]);
-  HASH[5] = safe_add(f, HASH[5]);
-  HASH[6] = safe_add(g, HASH[6]);
-  HASH[7] = safe_add(h, HASH[7]);
-  }
-  return HASH;
-  }
- 
-  function str2binb (str) {
-  var bin = Array();
-  var mask = (1 << chrsz) - 1;
-  for(var i = 0; i < str.length * chrsz; i += chrsz) {
-  bin[i>>5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - i % 32);
-  }
-  return bin;
-  }
- 
-  function Utf8Encode(string) {
-  string = string.replace(/\r\n/g,'\n');
-  var utftext = '';
- 
-  for (var n = 0; n < string.length; n++) {
- 
-  var c = string.charCodeAt(n);
- 
-  if (c < 128) {
-  utftext += String.fromCharCode(c);
-  }
-  else if((c > 127) && (c < 2048)) {
-  utftext += String.fromCharCode((c >> 6) | 192);
-  utftext += String.fromCharCode((c & 63) | 128);
-  }
-  else {
-  utftext += String.fromCharCode((c >> 12) | 224);
-  utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-  utftext += String.fromCharCode((c & 63) | 128);
-  }
- 
-  }
- 
-  return utftext;
-  }
- 
-  function binb2hex (binarray) {
-  var hex_tab = hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
-  var str = '';
-  for(var i = 0; i < binarray.length * 4; i++) {
-  str += hex_tab.charAt((binarray[i>>2] >> ((3 - i % 4)*8+4)) & 0xF) +
-  hex_tab.charAt((binarray[i>>2] >> ((3 - i % 4)*8 )) & 0xF);
-  }
-  return str;
-  }
- 
-  s = Utf8Encode(s);
-  return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
- }
-  async function createUser(name, uidi, type){
-   const uid = SHA256(uidi)
-    const response = await redis.createNewUser(name, uid, type).then(res=>{
-      document.getElementById("error").innerText = res.data
-      localStorage.setItem("SquadKey", "$@" + type + "user" + uid)
-      localStorage.setItem("SquadKeyType", type)
-      setShow(false)
-      setAuth(true)
-      router.push("/")
+  function SHA256(s) {
+    var chrsz = 8;
+    var hexcase = 0;
 
-    })
-     
-    
-   
+    function safe_add(x, y) {
+      var lsw = (x & 0xffff) + (y & 0xffff);
+      var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+      return (msw << 16) | (lsw & 0xffff);
+    }
+
+    function S(X, n) {
+      return (X >>> n) | (X << (32 - n));
+    }
+    function R(X, n) {
+      return X >>> n;
+    }
+    function Ch(x, y, z) {
+      return (x & y) ^ (~x & z);
+    }
+    function Maj(x, y, z) {
+      return (x & y) ^ (x & z) ^ (y & z);
+    }
+    function Sigma0256(x) {
+      return S(x, 2) ^ S(x, 13) ^ S(x, 22);
+    }
+    function Sigma1256(x) {
+      return S(x, 6) ^ S(x, 11) ^ S(x, 25);
+    }
+    function Gamma0256(x) {
+      return S(x, 7) ^ S(x, 18) ^ R(x, 3);
+    }
+    function Gamma1256(x) {
+      return S(x, 17) ^ S(x, 19) ^ R(x, 10);
+    }
+
+    function core_sha256(m, l) {
+      var K = new Array(
+        0x428a2f98,
+        0x71374491,
+        0xb5c0fbcf,
+        0xe9b5dba5,
+        0x3956c25b,
+        0x59f111f1,
+        0x923f82a4,
+        0xab1c5ed5,
+        0xd807aa98,
+        0x12835b01,
+        0x243185be,
+        0x550c7dc3,
+        0x72be5d74,
+        0x80deb1fe,
+        0x9bdc06a7,
+        0xc19bf174,
+        0xe49b69c1,
+        0xefbe4786,
+        0xfc19dc6,
+        0x240ca1cc,
+        0x2de92c6f,
+        0x4a7484aa,
+        0x5cb0a9dc,
+        0x76f988da,
+        0x983e5152,
+        0xa831c66d,
+        0xb00327c8,
+        0xbf597fc7,
+        0xc6e00bf3,
+        0xd5a79147,
+        0x6ca6351,
+        0x14292967,
+        0x27b70a85,
+        0x2e1b2138,
+        0x4d2c6dfc,
+        0x53380d13,
+        0x650a7354,
+        0x766a0abb,
+        0x81c2c92e,
+        0x92722c85,
+        0xa2bfe8a1,
+        0xa81a664b,
+        0xc24b8b70,
+        0xc76c51a3,
+        0xd192e819,
+        0xd6990624,
+        0xf40e3585,
+        0x106aa070,
+        0x19a4c116,
+        0x1e376c08,
+        0x2748774c,
+        0x34b0bcb5,
+        0x391c0cb3,
+        0x4ed8aa4a,
+        0x5b9cca4f,
+        0x682e6ff3,
+        0x748f82ee,
+        0x78a5636f,
+        0x84c87814,
+        0x8cc70208,
+        0x90befffa,
+        0xa4506ceb,
+        0xbef9a3f7,
+        0xc67178f2
+      );
+      var HASH = new Array(
+        0x6a09e667,
+        0xbb67ae85,
+        0x3c6ef372,
+        0xa54ff53a,
+        0x510e527f,
+        0x9b05688c,
+        0x1f83d9ab,
+        0x5be0cd19
+      );
+      var W = new Array(64);
+      var a, b, c, d, e, f, g, h, i, j;
+      var T1, T2;
+
+      m[l >> 5] |= 0x80 << (24 - (l % 32));
+      m[(((l + 64) >> 9) << 4) + 15] = l;
+
+      for (var i = 0; i < m.length; i += 16) {
+        a = HASH[0];
+        b = HASH[1];
+        c = HASH[2];
+        d = HASH[3];
+        e = HASH[4];
+        f = HASH[5];
+        g = HASH[6];
+        h = HASH[7];
+
+        for (var j = 0; j < 64; j++) {
+          if (j < 16) W[j] = m[j + i];
+          else
+            W[j] = safe_add(
+              safe_add(
+                safe_add(Gamma1256(W[j - 2]), W[j - 7]),
+                Gamma0256(W[j - 15])
+              ),
+              W[j - 16]
+            );
+
+          T1 = safe_add(
+            safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]),
+            W[j]
+          );
+          T2 = safe_add(Sigma0256(a), Maj(a, b, c));
+
+          h = g;
+          g = f;
+          f = e;
+          e = safe_add(d, T1);
+          d = c;
+          c = b;
+          b = a;
+          a = safe_add(T1, T2);
+        }
+
+        HASH[0] = safe_add(a, HASH[0]);
+        HASH[1] = safe_add(b, HASH[1]);
+        HASH[2] = safe_add(c, HASH[2]);
+        HASH[3] = safe_add(d, HASH[3]);
+        HASH[4] = safe_add(e, HASH[4]);
+        HASH[5] = safe_add(f, HASH[5]);
+        HASH[6] = safe_add(g, HASH[6]);
+        HASH[7] = safe_add(h, HASH[7]);
+      }
+      return HASH;
+    }
+
+    function str2binb(str) {
+      var bin = Array();
+      var mask = (1 << chrsz) - 1;
+      for (var i = 0; i < str.length * chrsz; i += chrsz) {
+        bin[i >> 5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - (i % 32));
+      }
+      return bin;
+    }
+
+    function Utf8Encode(string) {
+      string = string.replace(/\r\n/g, "\n");
+      var utftext = "";
+
+      for (var n = 0; n < string.length; n++) {
+        var c = string.charCodeAt(n);
+
+        if (c < 128) {
+          utftext += String.fromCharCode(c);
+        } else if (c > 127 && c < 2048) {
+          utftext += String.fromCharCode((c >> 6) | 192);
+          utftext += String.fromCharCode((c & 63) | 128);
+        } else {
+          utftext += String.fromCharCode((c >> 12) | 224);
+          utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+          utftext += String.fromCharCode((c & 63) | 128);
+        }
+      }
+
+      return utftext;
+    }
+
+    function binb2hex(binarray) {
+      var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
+      var str = "";
+      for (var i = 0; i < binarray.length * 4; i++) {
+        str +=
+          hex_tab.charAt((binarray[i >> 2] >> ((3 - (i % 4)) * 8 + 4)) & 0xf) +
+          hex_tab.charAt((binarray[i >> 2] >> ((3 - (i % 4)) * 8)) & 0xf);
+      }
+      return str;
+    }
+
+    s = Utf8Encode(s);
+    return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
+  }
+  async function createUser(name, uidi, type, profile) {
+    if (!name) {
+      document.getElementById("error").innerText = "Please enter a valid name!";
+      return;
+    }
+    if (!uidi) {
+      document.getElementById("error").innerText =
+        "Please login with one of the following!";
+      return;
+    }
+    const uid = SHA256(uidi);
+    const response = await redis
+      .createNewUser(name, uid, type, profile)
+      .then((res) => {
+        document.getElementById("error").innerText = res.data;
+        localStorage.setItem("SquadKey", "$@" + type + "user" + uid);
+        localStorage.setItem("SquadKeyType", type);
+        setShow(false);
+        setAuth(true);
+        router.push("/");
+      });
   }
   return (
-    <Modal show={show} hide={()=> setShow(false)} >
-       {/* Edit inside this componenet and it should
+    <Modal show={show} hide={() => setShow(false)}>
+      {/* Edit inside this componenet and it should
        show up on the auth modal 
        
        You shouldn't have to touch anything outside of this
@@ -216,17 +327,38 @@ function SHA256(s){
        I hope this makes sense, if you have any more questions 
        about nextjs I will be sure to answer.*/}
 
-
-       <input placeholder="Type in your name" type="text" onInput={(e)=>setName(e.target.value)}></input>
-       <br></br><button onClick={() => login(2)}>Connect with DeSo</button><br></br>
-       <button onClick={()=>metaMaskLogin()}>Connect with MetaMask</button>
-
-       <p>Name: {name}</p>
-       <p>UID:{uid}</p>
-
-       <button onClick={()=>createUser(name, uid, type)}>Create new user</button>
-       <p id="error"></p>
-
+      <h1 className={style.text}>Signup to Squadz</h1>
+      <input
+        className={style.input}
+        placeholder="Type in your full name"
+        type="text"
+        onInput={(e) => setName(e.target.value)}
+      ></input>
+      <br></br>
+      <button
+        className={style.connect}
+        style={{ backgroundColor: "rgba(0,152,242,255)" }}
+        onClick={() => login(2)}
+      >
+        <img src="/assets/image/deso.png" alt="Deso"></img>
+        Connect with DeSo
+      </button>
+      <button
+        className={style.connect}
+        style={{ backgroundColor: "#f88414" }}
+        onClick={() => metaMaskLogin()}
+      >
+        <img src="/assets/image/metamask.png" alt="Metamask"></img>
+        Connect with MetaMask
+      </button>
+      <br></br>
+      <button
+        className={style.signup}
+        onClick={() => createUser(name, uid, type, profile)}
+      >
+        Sign up
+      </button>
+      <p className={style.error} id="error"></p>
     </Modal>
-  )
+  );
 }

@@ -8,25 +8,25 @@ import io from "socket.io-client";
 //Create a new contect
 const SocketContext = React.createContext();
 
-
 export function useSocket() {
   return useContext(SocketContext);
 }
 
 export function SocketProvider({ id, children }) {
   const [socket, setSocket] = useState();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const user = localStorage.getItem("deso_user_key");
-    const roomName = router.query.id
-    //Set up a new client with the server 
-   if(roomName){
-    const newSocket = io("https://eva-gun-node.herokuapp.com/", {query: `chat=${roomName}`}  );
-    setSocket(newSocket);
-    return () => newSocket.close();
-   }
-    
+    const roomName = router.query.id;
+    //Set up a new client with the server
+    if (roomName) {
+      const newSocket = io("https://squadz.spatiumstories.xyz/", {
+        query: `chat=${roomName}`,
+      });
+      setSocket(newSocket);
+      return () => newSocket.close();
+    }
   }, [router]);
 
   return (
