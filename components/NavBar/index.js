@@ -26,7 +26,7 @@ export default function Navbar() {
       {communityList?.length > 0 &&
         communityList?.map(function (value) {
           const { Profile, Name, UID } = JSON.parse(value);
-          return <NavItem icon={Profile} text={Name} link={UID} />;
+          return <NavItem icon={Profile} text={Name} link={UID} key={UID} />;
         })}
     </div>
   );

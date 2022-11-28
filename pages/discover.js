@@ -17,7 +17,7 @@ import { useContext } from "react";
 import Head from "next/head"
 
 //Export the discover page with data as a param
-export default function discover({ data }) {
+export default function Discover({ data }) {
   const { join, current } = useContext(Context); 
   const [show, setShow] = join; //Join community modal state
   const [currentcom, setData] = current; //Current community state
