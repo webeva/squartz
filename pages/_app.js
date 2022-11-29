@@ -26,7 +26,6 @@ function App({ Component, pageProps }) {
   
   const [roomName, setRoomName] = useState(); //Store room name
   const [auth, setAuth] = useState("loading"); //Store auth state
-  const [load, loadState] = useState(true)
 
   //Change room name on route change
   useEffect(() => {
@@ -58,7 +57,7 @@ function App({ Component, pageProps }) {
     
     //Small delay to allow for the loading screen to load
     setTimeout(() => {
-      loadState(false)
+      
       
     }, 1000);
   }, []);
@@ -76,9 +75,9 @@ function App({ Component, pageProps }) {
           {/* Check if the app state is currently loading */}
 
           <>
-            {load ? (
+            {auth ? (
               <SocketProvider id={roomName}>
-                {load == true ? (
+                {auth == "loading" ? (
                   <div className="loading">
                     <img src="/assets/image/logo.png" alt="Loading"></img>
                   </div>

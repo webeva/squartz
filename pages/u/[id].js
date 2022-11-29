@@ -52,27 +52,13 @@ export default function Home({ data, result }) {
   async function sendMessage() {
     const message = document.getElementById("sendInput").value;
     if(message && state == false){
+    
       const channel = router.query.channel;
       const user = localStorage.getItem("SquadKey");
-      const data = await fetch(
-        "https://squadz.spatiumstories.xyz/get-messages/" + user
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          return data;
-        });
-  
+      const data = await fetch("https://squadz.spatiumstories.xyz/get-messages/" + user).then((res) => res.json()).then((data) => {return data;});
+      console.log(roomName,message,channel,image,user,data.Name,data.Profile)
       appendMessage(message, roomName, channel, image, data.Name, data.Profile);
-      socket.emit(
-        "send-chat-message",
-        roomName,
-        message,
-        channel,
-        image,
-        user,
-        data.Name,
-        data.Profile
-      );
+      socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
       document.getElementById("sendInput").value = "";
       setImage();
     }else{
@@ -162,7 +148,7 @@ export default function Home({ data, result }) {
     })
     if(owns == true){
      
-      setResc(false)
+      setResc(true)
       if(own == true){
         setState(true)
         document.getElementById("sendInput").placeholder = "You do not have permission to talk in this chat"
@@ -172,7 +158,7 @@ export default function Home({ data, result }) {
       }
       return
     }else{
-      setResc(true)
+      setResc(false)
       setNft(`https://diamondapp.com/nft/${id}`)
       document.getElementById("sendInput").placeholder = `To join this chat buy at least one NFT.`
       setState(true)
@@ -286,7 +272,7 @@ export default function Home({ data, result }) {
         
         {messages?.length > 0 &&
           messages.map(function (element, index) {
-            if(resc == false){
+            if(resc == true){
               return (
                 <div className={style.message} key={index}>
                   <img
