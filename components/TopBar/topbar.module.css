@@ -80,7 +80,7 @@
   content: "";
   width: 0%;
   height: 2px;
-  background: var(--primary-color);
+ background: #FF007A;
   display: block;
   margin: auto;
   transition: 0.7s;
@@ -89,6 +89,6 @@
   width: 100%;
 }
 .navButton:hover {
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  background-color: #FF007A;
+  border: 1px solid #FF007A;
 }

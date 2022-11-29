@@ -1,14 +1,4 @@
-.background {
-  background-color: var(--third-background-color);
-  width: 100vw;
-  height: 100vh;
-  vertical-align: middle;
-  justify-content: center;
-  display: flex;
-  padding-top: 40vh;
-  padding-left: 200px;
-  padding-right: 200px;
-}
+
 .text {
   text-align: center;
   color: var(--white-color);
@@ -16,6 +6,9 @@
 .main {
   display: grid;
   grid-template-columns: 50% 50%;
+  background-color: #080A14;
+  
+  
 }
 .left {
   text-align: center;
@@ -27,7 +20,7 @@
 .left h1 {
   position: absolute;
   width: 480px;
-  height: 116px;
+  height: 90px;
   left: 100px;
   top: 158px;
 
@@ -35,7 +28,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 128px;
-  line-height: 128px;
+  line-height: 115px;
   /* or 100% */
 
   display: flex;
@@ -49,13 +42,13 @@
   width: 465px;
   height: 116px;
   left: 108px;
-  top: 464px;
+  top: 440px;
 
   font-family: "Atkinson Hyperlegible";
   font-style: normal;
   font-weight: 400;
-  font-size: 23px;
-  line-height: 30px;
+  font-size: 22px;
+  line-height: 29px;
   display: flex;
   align-items: center;
   text-align: center;
