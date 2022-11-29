@@ -37,7 +37,7 @@ export default function Discover({ data }) {
             <div className={style.design}>
               <img className={style.profile} src={value.Profile} alt="Profile"></img>
               <p className={style.text}>
-                {value.Name} {value.Restriction}
+                {value.Name}
               </p>
               <button
                 className={style.buttom}

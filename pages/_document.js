@@ -8,7 +8,9 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   //Return the JSX
   return (
-    <Html>
+    <Html
+      lang="en"
+      dir="ltr">
       <Head />
       <body
         style={{

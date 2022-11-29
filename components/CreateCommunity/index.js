@@ -64,8 +64,13 @@ export default function CreateCommunity() {
   }
   async function createNewCommunity() {
     const id = createUID();
-    const response = await redis
-      .createNewCommunity(
+    const channels = [
+      {Name: "Welcome", Type: "free", ReadOnly: true},
+      {Name: "General", Type: "free", ReadOnly: false},
+      {Name: "Rules", Type: "free", ReadOnly: true}
+    ]
+    const allowedUsers = ""
+    const response = await redis.createNewCommunity(
         id,
         name,
         description,
@@ -73,8 +78,11 @@ export default function CreateCommunity() {
         banner,
         localStorage.getItem("SquadKey"),
         restriction,
-        "§Welcome§General§Rules",
-        localStorage.getItem("deso_user_key")
+        JSON.stringify(channels),
+        localStorage.getItem("deso_user_key"),
+        allowedUsers,
+        ""
+
       )
       .then((res) => {
         console.log(res);

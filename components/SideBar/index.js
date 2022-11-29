@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 export default function SideBar() {
   const redis = new RedisApi();
   const [channels, setChannels] = useState();
+  const [admin, setAdmin] = useState(false)
   const [banner, setBanner] = useState("/assets/image/bannerPlaceholder.png");
   const router = useRouter();
   useEffect(() => {
@@ -18,8 +19,13 @@ export default function SideBar() {
 
     const response = await redis.getCommunity("$@community" + id);
 
-    setChannels(response.Channels.split("§"));
+    setChannels(JSON.parse(response.Channels));
     setBanner(response.Banner);
+    const user = localStorage.getItem("SquadKey")
+    if(user == response.Admin || response.Allowed.split("§").includes(user)){
+      setAdmin(true)
+    }
+    
   }
 
   function joinChannel(value) {
@@ -31,22 +37,49 @@ export default function SideBar() {
     <div className={style.channels}>
       <img src={banner} alt="Banner" className={style.banner}></img>
 
-      {channels?.length > 0 &&
-        channels?.map(function (value) {
+      {channels != undefined &&
+     
+        
+        channels?.map(function(value){
+          
+          
+        
           if (value) {
             return (
               <>
+              {value.Type != "admin" ? (
+              <>
                 <button
+                key={value}
+                onClick={() => joinChannel(value.Name)}
+                className={style.messageChannel}
+              >
+                # {value.Name}
+              </button>
+              <br></br>
+              </>
+              ): (
+                <>
+                {admin &&
+                <>
+                  <button
                   key={value}
-                  onClick={() => joinChannel(value)}
+                  onClick={() => joinChannel(value.Name)}
                   className={style.messageChannel}
                 >
-                  # {value}
+                  # {value.Name}
                 </button>
                 <br></br>
+                </>
+                }
+                </>
+              )
+             
+              } 
               </>
             );
           }
+          
         })}
     </div>
   );
