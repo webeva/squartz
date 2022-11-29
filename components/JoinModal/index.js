@@ -26,8 +26,15 @@ export default function JoinModal() {
   }
 
   async function doesOwnNft(id, adminId) {
-    //Return true if id owns an adminId NFT
-    console.log(id, adminId);
+     //Return true if id owns an adminId NFT
+     const response = await deso.getNFTForUser(id);
+     let owns = false;
+     Object.values(response['data']['NFTsMap']).forEach((nft) => {
+       if (nft['PostEntryResponse']['PosterPublicKeyBase58Check'] === adminId) {
+         owns = true;
+       }
+     });
+     return owns;
   }
 
   async function joinCommunity() {
@@ -35,9 +42,14 @@ export default function JoinModal() {
     if (uid) {
       if (data.Restriction == "free") {
         document.getElementById("Join").innerText = "Joining";
-        const response = await redis.joinCommunity(uid, currentCom).then(() => {
-          setShow(false);
-          router.push(`/u/${currentCom}?channel=Welcome`);
+        const response = await redis.joinCommunity(uid, currentCom).then((res) => {
+          if(res == "Cannot join community again!"){
+            alert("Cannot join community again!")
+          }else{
+            setShow(false);
+            router.push(`/u/${currentCom}?channel=Welcome`);
+          }
+         
         });
       } else {
         const user = localStorage.getItem("deso_user_key");

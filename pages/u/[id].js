@@ -48,29 +48,31 @@ export default function Home({ data, result }) {
 
   async function sendMessage() {
     const message = document.getElementById("sendInput").value;
-    const channel = router.query.channel;
-    const user = localStorage.getItem("SquadKey");
-    const data = await fetch(
-      "https://eva-gun-node.herokuapp.com/get-messages/" + user
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      });
-
-    appendMessage(message, roomName, channel, image, data.Name, data.Profile);
-    socket.emit(
-      "send-chat-message",
-      roomName,
-      message,
-      channel,
-      image,
-      user,
-      data.Name,
-      data.Profile
-    );
-    document.getElementById("sendInput").value = "";
-    setImage();
+    if(message){
+      const channel = router.query.channel;
+      const user = localStorage.getItem("SquadKey");
+      const data = await fetch(
+        "https://squadz.spatiumstories.xyz/get-messages/" + user
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          return data;
+        });
+  
+      appendMessage(message, roomName, channel, image, data.Name, data.Profile);
+      socket.emit(
+        "send-chat-message",
+        roomName,
+        message,
+        channel,
+        image,
+        user,
+        data.Name,
+        data.Profile
+      );
+      document.getElementById("sendInput").value = "";
+      setImage();
+    }
   }
 
   function appendMessage(message, roomName, channel, image, name, profile) {
@@ -186,6 +188,11 @@ export default function Home({ data, result }) {
     const link = await deso.uploadImage(user, JWT, result);
     setImage(link.ImageURL);
   }
+  async function leave(){
+    const uid = router.query.id
+    const response = await redis.leaveCommunity(localStorage.getItem("SquadKey"), uid )
+    router.push("/")
+  }
 
   return (
     <>
@@ -249,7 +256,9 @@ export default function Home({ data, result }) {
           </>
         )}
       </div>
+      
       <div className={style.input}>
+      <button className={style.leave} onClick={()=>leave()}>Leave</button>
         <div className={style.inputContainer}>
           <input
             onKeyPress={(e) => checkIfEnter(e)}

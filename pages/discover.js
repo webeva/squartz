@@ -35,7 +35,7 @@ export default function Discover({ data }) {
         return (
           <>
             <div className={style.design}>
-              <img className={style.profile} src={value.Profile}></img>
+              <img className={style.profile} src={value.Profile} alt="Profile"></img>
               <p className={style.text}>
                 {value.Name} {value.Restriction}
               </p>

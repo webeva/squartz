@@ -75,7 +75,7 @@ function App({ Component, pageProps }) {
               <SocketProvider id={roomName}>
                 {auth == "loading" ? (
                   <div className="loading">
-                    <img src="/assets/image/logo.png"></img>
+                    <img src="/assets/image/logo.png" alt="Loading"></img>
                   </div>
                 ) : (
                   <div></div>

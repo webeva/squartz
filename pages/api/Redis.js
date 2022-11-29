@@ -10,9 +10,25 @@ class RedisApi {
             return
         }
         try{
-            const response = axios.post("https://squadz.spatiumstories.xyz/join-new-community", {
+            const response = axios.post("http://localhost:3030/join-new-community", {
                 UID: uid, 
                 Id: id
+            })
+            return response
+        }catch(error){
+            console.log(error)
+            return
+        }
+    }
+    async leaveCommunity(id, chatId){
+        if(!id || !chatId){
+            console.log("Cannot leave community")
+            return
+        }
+        try{
+            const response = await axios.post("https://eva-gun-node.herokuapp.com/leave-community", {
+                Id: id, 
+                Chat: chatId
             })
             return response
         }catch(error){

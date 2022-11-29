@@ -97,12 +97,12 @@ export default function TopBar() {
           {auth ? (
             <>
               <div className={style.dropContainer}>
-                <img className={style.profile} src={profile}></img>
+                <img className={style.profile} src={profile} alt="Profile"></img>
                 <li className={style.logged}>{name}</li>
                 <div className={style.dropdown}>
                   <ul>
                     <li onClick={() => logout()}>
-                      <img src="/assets/svg/logout.svg" />
+                      <img src="/assets/svg/logout.svg" alt="Logout" />
                       Log out
                     </li>
                   </ul>

@@ -90,7 +90,7 @@
 .inputContainer {
   background-color: var(--secondary-background-color);
   border-radius: 5px;
-  margin-left: 27vw;
+  margin-left: 15vw;
   margin-top: 1vh;
   width: fit-content;
   display: inline-block;
@@ -147,4 +147,14 @@
   border-radius: 5px;
   margin-left: 50px;
   width: 300px;
+}
+.leave{
+  background-color: rgb(224, 83, 83);
+  color: var(--white-color);
+  width: 100px;
+  height: 6vh;
+  margin-left: 6vw;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
