@@ -26,6 +26,7 @@ export default function TopBar() {
   const { modal, login, community } = useContext(Context);
   const [show, setShow] = modal;
   const [loginShow, setLoginShow] = login;
+  const [log, setLog] = useState(false)
   const [communityShow, setCommunityShow] = community;
   const [auth, setAuth] = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -67,6 +68,14 @@ export default function TopBar() {
       const response = await deso.login(2);
     }
   }
+  function routeToHome(){
+    const user = localStorage.getItem("SquadKey")
+    if(user){
+      router.push("/")
+    }else{
+      return
+    }
+  }
 
   return (
     <>
@@ -81,7 +90,7 @@ export default function TopBar() {
           className={style.logo}
           src="/assets/image/logo.png"
           alt="Logo goes here"
-          onClick={() => router.push("/")}
+          onClick={() => routeToHome()}
         ></img>
         <ul className={style.navList}>
           {auth ? (
@@ -98,8 +107,9 @@ export default function TopBar() {
             <>
               <div className={style.dropContainer}>
                 <img className={style.profile} src={profile} alt="Profile"></img>
-                <li className={style.logged}>{name}</li>
-                <div className={style.dropdown}>
+                <li className={style.logged} onClick={()=> setLog(!log)}>{name}</li>
+                <img className={style.down} src="/assets/svg/down.svg" alt="Down" onClick={()=> setLog(!log)}></img>
+                <div className={style.dropdown} style={{display:log ? "block": "none"}}>
                   <ul>
                     <li onClick={() => logout()}>
                       <img src="/assets/svg/logout.svg" alt="Logout" />

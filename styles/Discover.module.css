@@ -24,6 +24,26 @@
   border-radius: 8px;
   margin-top: 2vh;
   cursor: pointer;
+  transition: 0.5s ease-in;
+  
+}
+.profile:hover{
+  filter: brightness(0.5);
+}
+.design:hover  .text{
+  display: block;
+}
+.design:hover  .text2{
+  display: block;
+}
+.text1:hover{
+  display: block;
+}
+.text1:hover ~ .profile{
+  filter: brightness(0.5);
+}
+.text2:hover{
+  display: block;
 }
 .name {
   position: relative;
@@ -42,25 +62,22 @@
 }
 .text {
   position: absolute;
-  bottom: 0px;
-  left: 0px;
+  top: 30%;
+  font-size: 25px;
+  text-align: center;
+  display: none;
   color: var(--white-color);
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.432);
-  height: 5vh;
-  padding-left: 10px;
+  transition: 0.5s ease-in;
 }
-.buttom {
+.text2 {
   position: absolute;
-  bottom: 16px;
-  left: 62%;
+  top: 50%;
+  font-size: 13px;
+  text-align: center;
+  display: none;
   color: var(--white-color);
-  width: 100px;
-  cursor: pointer;
-  height: 5vh;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  outline: none;
-  border: none;
-  background-color: rgba(48, 52, 69, 255);
+  width: 100%;
+  transition: 0.5s ease-in;
 }
+

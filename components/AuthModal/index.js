@@ -283,8 +283,7 @@ export default function AuthModal() {
       return;
     }
     if (!uidi) {
-      document.getElementById("error").innerText =
-        "Please login with one of the following!";
+      document.getElementById("error").innerText = "Please login with one of the following!";
       return;
     }
     const uid = SHA256(uidi);
@@ -296,7 +295,7 @@ export default function AuthModal() {
         localStorage.setItem("SquadKeyType", type);
         setShow(false);
         setAuth(true);
-        router.push("/");
+        router.push("/discover");
       });
   }
   return (

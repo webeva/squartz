@@ -67,7 +67,8 @@ export default function CreateCommunity() {
     const channels = [
       {Name: "Welcome", Type: "free", ReadOnly: true},
       {Name: "General", Type: "free", ReadOnly: false},
-      {Name: "Rules", Type: "free", ReadOnly: true}
+      {Name: "Rules", Type: "free", ReadOnly: true},
+      {name: "NFTHolders", Type: "nft", ReadOnly: false}
     ]
     const allowedUsers = ""
     const response = await redis.createNewCommunity(
@@ -229,12 +230,12 @@ export default function CreateCommunity() {
               <h1 className={style.text}>Restriction</h1>
               <div className={style.dropdown}>
                 <div className={style.options}>
-                  <div onClick={() => setRestriction("free")}>
+                  <div className={restriction == "free" ? style.active : "" } onClick={() => setRestriction("free")}>
                     <h1>Free for all</h1>
                     <p>Allow anybody to join your community</p>
                   </div>
-                  <div>
-                    <h1 onClick={() => setRestriction("nft")}>NFT Gated</h1>
+                  <div className={restriction == "nft" ? style.active : "" }  onClick={() => setRestriction("nft")}>
+                    <h1 >NFT Gated</h1>
                     <p>
                       Restrict access to anybody that owns at least 1 one of
                       your NFT

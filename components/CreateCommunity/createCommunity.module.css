@@ -85,3 +85,6 @@
 .options div h1 {
   font-size: 17px;
 }
+.active{
+  background-color: var(--third-background-color);
+}

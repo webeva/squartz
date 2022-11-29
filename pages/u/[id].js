@@ -56,7 +56,6 @@ export default function Home({ data, result }) {
       const channel = router.query.channel;
       const user = localStorage.getItem("SquadKey");
       const data = await fetch("https://squadz.spatiumstories.xyz/get-messages/" + user).then((res) => res.json()).then((data) => {return data;});
-      console.log(roomName,message,channel,image,user,data.Name,data.Profile)
       appendMessage(message, roomName, channel, image, data.Name, data.Profile);
       socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
       document.getElementById("sendInput").value = "";
@@ -124,7 +123,7 @@ export default function Home({ data, result }) {
           }
           if(value.Type == "nft"){
             
-            checkIfOwns(name.GatingDetails, value.ReadOnly)
+            checkIfOwns(name.GatingDetails, value.ReadOnly, name.Deso)
           
 
           }
@@ -136,16 +135,16 @@ export default function Home({ data, result }) {
     
     
   }
-  async function checkIfOwns(id, own){
+  async function checkIfOwns(id, own, adminId){
     let owns = false
    
     const user = localStorage.getItem("deso_user_key")
     const nfts = await deso.getNFTForUser(user)
     Object.values(nfts['data']['NFTsMap']).forEach((nft) => {
-      if(nft.PostEntryResponse.PostHashHex == id){
-         owns = true
+      if (nft['PostEntryResponse']['PosterPublicKeyBase58Check'] === adminId) {
+        owns = true;
       }
-    })
+    });
     if(owns == true){
      
       setResc(true)
@@ -268,7 +267,10 @@ export default function Home({ data, result }) {
       />
       
       <div id="messageContainer" className={style.messageContainer}>
-        <header className={style.topChat}>{path}</header>
+        <header className={style.topChat}>
+          {path}
+          <button className={style.leave} onClick={()=>leave()}>Leave</button>
+          </header>
         
         {messages?.length > 0 &&
           messages.map(function (element, index) {
@@ -315,7 +317,7 @@ export default function Home({ data, result }) {
       </div>
       
       <div className={style.input}>
-      <button className={style.leave} onClick={()=>leave()}>Leave</button>
+      
         <div className={style.inputContainer}>
           <input
             onKeyPress={(e) => checkIfEnter(e)}

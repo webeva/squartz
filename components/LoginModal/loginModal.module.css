@@ -1,5 +1,8 @@
 .text {
   text-align: center;
+  font-family: "Bebas Neue";
+  line-height: 10px;
+  font-size: 38px;
 }
 .input {
   width: 100%;
@@ -18,16 +21,23 @@
   border-radius: 7px;
   border: 1px solid black;
   outline: none;
-  margin-top: 10px;
+  margin-top: 5px;
   color: var(--white-color);
   display: flex;
   margin: none;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
 }
 .connect img {
   width: 1.4rem;
   height: 1.4rem;
   vertical-align: middle;
   margin-right: 5px;
+}
+.box{
+  display: flex;
+  justify-content: center;
 }
 .signup {
   margin-top: 2vh;
@@ -41,5 +51,6 @@
 }
 .error {
   text-align: center;
-  color: rgb(217, 62, 62);
+  color: var(--white-color);
+  margin-top: 3vh;
 }

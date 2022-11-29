@@ -27,6 +27,7 @@
   display: inline-block;
   color: var(--white-color);
   padding: 1.5rem;
+  padding-right: 1rem;
   cursor: pointer;
 }
 .dropdown {
@@ -91,4 +92,12 @@
 .navButton:hover {
   background-color: #FF007A;
   border: 1px solid #FF007A;
+}
+.down{
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 1rem;
 }

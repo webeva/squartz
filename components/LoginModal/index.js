@@ -16,6 +16,7 @@ export default function LoginModal() {
   const [isAuth, setAuth] = useContext(AuthContext);
 
   const [text, setText] = useState();
+  
   const auth = new AuthApi();
   const deso = new DesoApi();
 
@@ -27,7 +28,6 @@ export default function LoginModal() {
         const key = localStorage.getItem("deso_user_key");
         if (key) {
           const response = await auth.checkLogin(type, key);
-          console.log(response);
           if (response.Logged == true) {
             setShow(false);
             setAuth(true);
@@ -59,7 +59,8 @@ export default function LoginModal() {
             localStorage.setItem("SquadKeyType", "MetaMask");
             router.push("/");
           } else {
-            setText("This account doesn't exist!");
+           setText(`User Account not yet signed up. `)
+            
           }
         } catch (error) {
           console.log({ error });
@@ -72,6 +73,7 @@ export default function LoginModal() {
     <Modal show={show} hide={() => setShow(false)}>
       <h1 className={style.text}>Login to Squadz</h1>
       <br></br>
+      <div className={style.box}>
       <button
         className={style.connect}
         style={{ backgroundColor: "rgba(0,152,242,255)" }}
@@ -79,7 +81,7 @@ export default function LoginModal() {
       >
         <img src="/assets/image/deso.png" alt="Deso"></img>
         Login with DeSo
-      </button>
+      </button><br></br>
       <button
         className={style.connect}
         style={{ backgroundColor: "#f88414" }}
@@ -88,7 +90,8 @@ export default function LoginModal() {
         <img src="/assets/image/metamask.png" alt="Metamask"></img>
         Login with MetaMask
       </button>
-      <p id="error">{text}</p>
+      </div>
+      <div id="error" className={style.error}>{text}</div>
     </Modal>
   );
 }

@@ -54,7 +54,6 @@ export default function JoinModal() {
         const user = localStorage.getItem("deso_user_key");
         if (user) {
           const result = await doesOwnNft(user, data.Deso);
-          console.log(result);
           if (result == true) {
             document.getElementById("Join").innerText = "Joining";
             const response = await redis
@@ -81,7 +80,6 @@ export default function JoinModal() {
       show={show}
       hide={() => {
         setShow(false);
-        setData(false);
       }}
     >
       <h1 className={style.main}>{data?.Name}</h1>
@@ -108,7 +106,7 @@ export default function JoinModal() {
         <button
           onClick={() => {
             setShow(false);
-            setData(false);
+           
           }}
           style={{ marginLeft: "45%" }}
         >
