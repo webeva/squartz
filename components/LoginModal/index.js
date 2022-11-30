@@ -11,8 +11,9 @@ import { useRouter } from "next/router";
 import style from "./loginModal.module.css";
 
 export default function LoginModal() {
-  const { login } = useContext(Context);
+  const { login, modal } = useContext(Context);
   const [show, setShow] = login;
+  const [signup, setSignup] = modal
   const [isAuth, setAuth] = useContext(AuthContext);
 
   const [text, setText] = useState();
@@ -35,7 +36,7 @@ export default function LoginModal() {
             localStorage.setItem("SquadKeyType", "DeSo");
             router.push("/");
           } else {
-            setText("This account doesn't exist!");
+            setText(`User Account not yet signed up. `)
           }
         }
       });
@@ -91,7 +92,9 @@ export default function LoginModal() {
         Login with MetaMask
       </button>
       </div>
+      <div className={style.account} onClick={()=>{setShow(false), setSignup(true)}}>Don't have an account? Click here to sign up</div>
       <div id="error" className={style.error}>{text}</div>
+     
     </Modal>
   );
 }

@@ -54,3 +54,12 @@
   color: var(--white-color);
   margin-top: 3vh;
 }
+.account{
+  text-align: center;
+  cursor: pointer;
+  margin-top: 2vh;
+  
+}
+.account:hover{
+  text-decoration: underline;
+}
