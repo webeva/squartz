@@ -68,7 +68,7 @@ export default function CreateCommunity() {
       {Name: "Welcome", Type: "free", ReadOnly: true},
       {Name: "General", Type: "free", ReadOnly: false},
       {Name: "Rules", Type: "free", ReadOnly: true},
-      {name: "NFTHolders", Type: "nft", ReadOnly: false}
+      {Name: "NFTHolders", Type: "nft", ReadOnly: false}
     ]
     const allowedUsers = ""
     const response = await redis.createNewCommunity(

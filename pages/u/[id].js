@@ -53,8 +53,7 @@ export default function Home({ data, result }) {
     const message = document.getElementById("sendInput").value;
     if(message && state == false){
       document.getElementById("sendInput").value = "";
-     
-      document.getElementById("input").style.height = "8.5vh"
+      changeSize()
       const channel = router.query.channel;
       const user = localStorage.getItem("SquadKey");
       const data = await fetch("https://squadz.spatiumstories.xyz/get-messages/" + user).then((res) => res.json()).then((data) => {return data;});
@@ -62,6 +61,8 @@ export default function Home({ data, result }) {
       socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
       
       setImage();
+
+     
     }else{
       alert("Cannot send message")
     }
@@ -160,7 +161,7 @@ export default function Home({ data, result }) {
       return
     }else{
       setResc(false)
-      setNft(`https://diamondapp.com/nft/${id}`)
+      setNft("Buy")
       document.getElementById("sendInput").placeholder = `To join this chat buy at least one NFT.`
       setState(true)
     }
@@ -218,11 +219,7 @@ export default function Home({ data, result }) {
       return "A few seconds ago";
     }
   }
-  function checkIfEnter(e) {
-    if (e.charCode == 13) {
-      sendMessage();
-    }
-  }
+  
   async function uploadImage() {
     const user = localStorage.getItem("deso_user_key");
     if (!user) {
@@ -252,7 +249,10 @@ export default function Home({ data, result }) {
     var input = document.getElementById("input")
     textarea.style.height = "";
     input.style.height = (textarea.scrollHeight + 15) + "px"
-     textarea.style.height = textarea.scrollHeight + "px"
+    textarea.style.height = textarea.scrollHeight + "px"
+    if(textarea.value == ""){
+      textarea.style.height = textarea.scrollHeight + "px"
+    }
   }
 
   return (
@@ -330,15 +330,14 @@ export default function Home({ data, result }) {
     
         <div className={style.inputContainer}>
           <textarea
-            onKeyPress={(e) => checkIfEnter(e)}
+           
             className={style.messageInput}
             id="sendInput"
             placeholder="Click here to start chatting"
             type="text"
             readOnly={state == false ? false : true}
             onInput={()=>changeSize()}
-            cols={1}
-            rows={1}
+           
           />
         </div>
         <button
@@ -372,14 +371,7 @@ export default function Home({ data, result }) {
           Send
         </button>
 }
-        {nft &&
-          <button
-          className={style.sendButton}
-          id="sendButton"
-          onClick={()=>router.push(nft)}
-          
-        >Buy Nft</button>
-        }
+        
 
         
       </div>
