@@ -8,6 +8,7 @@ import NavItem from "../NavItem";
 import RedisApi from "../../pages/api/Redis";
 import { useEffect, useState } from "react";
 
+
 //Export the JSX
 export default function Navbar() {
   const redis = new RedisApi();

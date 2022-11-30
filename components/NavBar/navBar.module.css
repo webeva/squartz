@@ -2,7 +2,8 @@
   position: fixed;
   top: 11vh;
   left: 0;
-  height: 100vh;
+  height:  100vh;
+  z-index: 5;
   width: 4.8rem;
   margin: 0;
   display: flex;
@@ -10,4 +11,6 @@
   color: white;
   background-color: #1c1d24;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  overflow-y:auto;
+  overflow-x:hidden;
 }
