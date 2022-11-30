@@ -92,7 +92,7 @@ export default function LoginModal() {
         Login with MetaMask
       </button>
       </div>
-      <div className={style.account} onClick={()=>{setShow(false), setSignup(true)}}>Don't have an account? Click here to sign up</div>
+      <div className={style.account} onClick={()=>{setShow(false), setSignup(true)}}>Don&apos;t have an account? Click here to sign up</div>
       <div id="error" className={style.error}>{text}</div>
      
     </Modal>
