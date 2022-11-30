@@ -219,7 +219,12 @@ export default function Home({ data, result }) {
       return "A few seconds ago";
     }
   }
-  
+  function checkIfEnter(e) {
+    if (e.charCode == 13) {
+      e.preventDefault()
+      sendMessage();
+    }
+  }
   async function uploadImage() {
     const user = localStorage.getItem("deso_user_key");
     if (!user) {
@@ -279,7 +284,7 @@ export default function Home({ data, result }) {
       <div id="messageContainer" className={style.messageContainer}>
         <header className={style.topChat}>
           {path}
-          <button className={style.leave} onClick={()=>leave()}>Leave</button>
+          
           </header>
         
         {messages?.length > 0 &&
@@ -327,10 +332,10 @@ export default function Home({ data, result }) {
       </div>
       
       <div id="input" className={style.input}>
-    
+      <button className={style.leave} onClick={()=>leave()}>Leave</button>
         <div className={style.inputContainer}>
           <textarea
-           
+            onKeyPress={(e) => checkIfEnter(e)}
             className={style.messageInput}
             id="sendInput"
             placeholder="Click here to start chatting"

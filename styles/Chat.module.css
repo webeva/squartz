@@ -97,7 +97,7 @@
 .inputContainer {
   background-color: var(--secondary-background-color);
   border-radius: 5px;
-  margin-left: 15vw;
+  margin-left: 4vw;
   margin-top: 1vh;
   width: fit-content;
   display: inline-block;
@@ -168,8 +168,7 @@
   color: var(--white-color);
   width: 100px;
   height: 6vh;
-  position: relative;
-  left: 53vw;
+  margin-left: 18vw;
   
   border: none;
   border-radius: 5px;
