@@ -52,15 +52,15 @@ export default function Home({ data, result }) {
   async function sendMessage() {
     const message = document.getElementById("sendInput").value;
     if(message && state == false){
-    
+      document.getElementById("sendInput").value = "";
+     
+      document.getElementById("input").style.height = "8.5vh"
       const channel = router.query.channel;
       const user = localStorage.getItem("SquadKey");
       const data = await fetch("https://squadz.spatiumstories.xyz/get-messages/" + user).then((res) => res.json()).then((data) => {return data;});
       appendMessage(message, roomName, channel, image, data.Name, data.Profile);
       socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
-      document.getElementById("sendInput").value = "";
-      var textarea = document.getElementById("sendInput")
-      document.getElementById("input").style.height = "8.5vh"
+      
       setImage();
     }else{
       alert("Cannot send message")
@@ -273,6 +273,7 @@ export default function Home({ data, result }) {
         ref={inputFile}
         onChange={changeHandler}
         style={{ display: "none" }}
+        
       />
       
       <div id="messageContainer" className={style.messageContainer}>
