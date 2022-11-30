@@ -22,3 +22,16 @@
   height: 11vh;
   object-fit: cover;
 }
+@media all and (max-width: 800px)  {
+  .channels{
+    width: 30vw;
+  }
+  .messageChannel{
+    width: 10vw;
+    text-align: center;
+    font-size: 14px;
+    
+  }
+ 
+}
+

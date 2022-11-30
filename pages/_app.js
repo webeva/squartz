@@ -69,6 +69,7 @@ function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Squadz</title>
+        
       </Head>
       <AuthValue>
         <ModalState>

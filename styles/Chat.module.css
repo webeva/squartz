@@ -62,9 +62,7 @@
   padding-bottom: 9px;
   width: 800px;
   white-space: pre-line;
-
   margin: 0;
-  
 
 }
 .image {
@@ -135,7 +133,7 @@
   resize: none;
   font-family: Arial, Helvetica, sans-serif;
   vertical-align: middle;
-  padding-top: 5px;
+  padding-top: 10px;
   
  
 }
@@ -176,4 +174,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+@media all and (max-width:800px) {
+  .messageContainer{
+   
+    margin-left: calc(30vw + 4.8rem);
+  }
 }

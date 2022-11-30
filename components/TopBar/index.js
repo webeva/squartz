@@ -42,7 +42,7 @@ export default function TopBar() {
     } else {
       setAuth(false);
     }
-  }, []);
+  }, [router]);
 
   async function getUserData() {
     const user = localStorage.getItem("SquadKey");

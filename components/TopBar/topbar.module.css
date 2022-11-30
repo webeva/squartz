@@ -101,3 +101,20 @@
   cursor: pointer;
   margin-right: 1rem;
 }
+@media all and (max-width: 700px)  {
+  .logo {
+    width: 10rem;
+  }
+  .navItem {
+    padding: 0rem;
+    margin-left:5px;
+
+   
+   
+   
+  }
+  .navList{
+    width: 110%;
+   
+  }
+}

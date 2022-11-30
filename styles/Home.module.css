@@ -55,3 +55,29 @@
 
   color: #ffffff;
 }
+.computer{
+  margin-top: 10vh;
+  margin-right: 10vw;
+ 
+  
+}
+@media all and (max-width: 800px)  {
+  .left h1 {
+    left: 20px;
+    font-size: 110px;
+    line-height: 105px;
+    z-index: 5;
+  } 
+  .left h2{
+    left: 30px;
+    top: 420px;
+    z-index: 5;
+  }
+  .computer{
+   
+    position: absolute;
+    right: 100px;
+    left: 0;
+    z-index: 0;
+  }
+}

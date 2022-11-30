@@ -11,6 +11,7 @@ export default function Document() {
     <Html
       lang="en"
       dir="ltr">
+        <link rel="shortcut icon" href="/favicon.ico" />
       <Head />
       <body
         style={{
