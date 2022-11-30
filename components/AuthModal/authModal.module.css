@@ -36,6 +36,12 @@
   vertical-align: middle;
   margin-right: 5px;
 }
+.body{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-bottom: 50px;
+}
 .signup {
   margin-top: 2vh;
   background-color: rgba(48, 52, 69, 255);
@@ -44,7 +50,8 @@
   color: var(--white-color);
   padding: 15px 40px;
   cursor: pointer;
-  margin-left: 13vw;
+  position: absolute;
+  right: 40%;
 }
 .error {
   text-align: center;

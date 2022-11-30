@@ -59,6 +59,8 @@ export default function Home({ data, result }) {
       appendMessage(message, roomName, channel, image, data.Name, data.Profile);
       socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
       document.getElementById("sendInput").value = "";
+      var textarea = document.getElementById("sendInput")
+      document.getElementById("input").style.height = "8.5vh"
       setImage();
     }else{
       alert("Cannot send message")
@@ -245,6 +247,13 @@ export default function Home({ data, result }) {
     const response = await redis.leaveCommunity(localStorage.getItem("SquadKey"), uid )
     router.push("/")
   }
+  function changeSize(){
+    var textarea = document.getElementById("sendInput");
+    var input = document.getElementById("input")
+    textarea.style.height = "";
+    input.style.height = (textarea.scrollHeight + 15) + "px"
+     textarea.style.height = textarea.scrollHeight + "px"
+  }
 
   return (
     <>
@@ -316,16 +325,19 @@ export default function Home({ data, result }) {
         )}
       </div>
       
-      <div className={style.input}>
-      
+      <div id="input" className={style.input}>
+    
         <div className={style.inputContainer}>
-          <input
+          <textarea
             onKeyPress={(e) => checkIfEnter(e)}
             className={style.messageInput}
             id="sendInput"
             placeholder="Click here to start chatting"
             type="text"
             readOnly={state == false ? false : true}
+            onInput={()=>changeSize()}
+            cols={1}
+            rows={1}
           />
         </div>
         <button

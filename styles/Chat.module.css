@@ -61,7 +61,7 @@
   padding-top: 9px;
   padding-bottom: 9px;
   width: 800px;
-  
+  white-space: pre-line;
 
   margin: 0;
   
@@ -103,6 +103,7 @@
   margin-top: 1vh;
   width: fit-content;
   display: inline-block;
+  
 }
 .sendButton {
   display: inline-block;
@@ -131,14 +132,21 @@
   width: 47vw;
   height: 6vh;
   padding-left: 10px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+  vertical-align: middle;
+  padding-top: 5px;
+  
+ 
 }
 .input {
   background-color: rgba(48, 52, 69, 255);
   width: 100vw;
-  height: 8vh;
+  height: calc(8vh + 5px);
   position: absolute;
   bottom: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 .topChat {
   position: fixed;

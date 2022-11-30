@@ -300,6 +300,7 @@ export default function AuthModal() {
   }
   return (
     <Modal show={show} hide={() => setShow(false)}>
+      <div className={style.body}>
       {/* Edit inside this componenet and it should
        show up on the auth modal 
        
@@ -358,6 +359,7 @@ export default function AuthModal() {
         Sign up
       </button>
       <p className={style.error} id="error"></p>
+      </div>
     </Modal>
   );
 }

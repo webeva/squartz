@@ -171,6 +171,7 @@ export default function CreateCommunity() {
 
   return (
     <Modal show={show} hide={() => setShow(false)}>
+      <div className={style.body}>
       {currentPage == 0 ? (
         <>
           <h1 className={style.text}>Create a community</h1>
@@ -247,11 +248,12 @@ export default function CreateCommunity() {
           )}
         </>
       )}
-
+      <br></br>
       <button id="next" className={style.next} onClick={() => nextPage()}>
         Next
       </button>
       <p className={style.error}>{error}</p>
+      </div>
     </Modal>
   );
 }
