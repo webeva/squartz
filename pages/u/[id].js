@@ -51,7 +51,7 @@ export default function Home({ data, result }) {
     const channel = router.query.channel;
     const user = localStorage.getItem("SquadKey");
     const data = await fetch(
-      "https://eva-gun-node.herokuapp.com/get-messages/" + user
+      "https://squadz.spatiumstories.xyz/get-messages/" + user
     )
       .then((res) => res.json())
       .then((data) => {
