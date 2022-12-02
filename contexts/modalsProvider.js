@@ -13,6 +13,8 @@ const ModalState = ({ children }) => {
   const [createModalState, setCreateModalState] = useState(intialState);
   const [community, setCommunity] = useState(intialState);
   const [currentCommunity, setCurrentCommunity] = useState(intialState);
+  const [vibe, setVibe] = useState(intialState)
+  const [vibeId, setVibeId] = useState(intialState)
   return (
     <Context.Provider
       value={{
@@ -21,6 +23,8 @@ const ModalState = ({ children }) => {
         community: [createModalState, setCreateModalState], //Current state of create community modal
         join: [community, setCommunity], //Curent state of join community modal
         current: [currentCommunity, setCurrentCommunity], //Current community (for discovery )
+        vibe: [vibe, setVibe], 
+        vibeId: [vibeId, setVibeId]
       }}
     >
       {children}

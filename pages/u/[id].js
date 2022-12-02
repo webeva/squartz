@@ -9,11 +9,16 @@ import { useEffect, useState, useRef } from "react";
 import style from "../../styles/Chat.module.css";
 //Import from next 
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Context } from "../../contexts/modalsProvider";
 
 //Import components 
 import Navbar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import EmojiPicker from "../../components/EmojiPicker";
+
+import dynamic from "next/dynamic";
+const VibeModal = dynamic(import("../../components/VibeModal")) ;
 
 //Import APIs
 import RedisApi from "../api/Redis";
@@ -36,6 +41,8 @@ export default function Home({ data, result }) {
   const [resc, setResc] = useState(true)
   const [nft, setNft] = useState()
   const inputFile = useRef(null);
+  const {vibe} = useContext(Context)
+  const [vibes, setVibes] = vibe
 
 
   /* Whenever we receive a message from socket run this */
@@ -129,6 +136,15 @@ export default function Home({ data, result }) {
             checkIfOwns(name.GatingDetails, value.ReadOnly, name.Deso)
           
 
+          }
+          if(value.Type == "popupa"){
+
+            setVibes(true)
+          }else{
+            setVibes(false)
+          }
+          if(value.Type == "popupb"){
+            router.push("https://randhir.nftz.me/created")
           }
         }
         
@@ -281,7 +297,10 @@ export default function Home({ data, result }) {
         
       />
       
+    <VibeModal/>
+      
       <div id="messageContainer" className={style.messageContainer}>
+      
         <header className={style.topChat}>
           {path}
           
