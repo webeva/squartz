@@ -10,7 +10,7 @@ class RedisApi {
             return
         }
         try{
-            const response = axios.post("https://eva-gun-node.herokuapp.com/join-new-community", {
+            const response = axios.post("https://squadz.spatiumstories.xyz/join-new-community", {
                 UID: uid, 
                 Id: id
             })
@@ -26,7 +26,7 @@ class RedisApi {
             return
         }
         try{
-            const response = await axios.post("https://eva-gun-node.herokuapp.com/leave-community", {
+            const response = await axios.post("https://squadz.spatiumstories.xyz/leave-community", {
                 Id: id, 
                 Chat: chatId
             })
@@ -43,7 +43,7 @@ class RedisApi {
             return
         }
         try{
-            const response = await axios.post("https://eva-gun-node.herokuapp.com/create-new-community", {
+            const response = await axios.post("https://squadz.spatiumstories.xyz/create-new-community", {
                 UID: id, 
                 Name: name, 
                 Description: desc, 

@@ -21,7 +21,7 @@ export function SocketProvider({ id, children }) {
     const roomName = router.query.id;
     //Set up a new client with the server
     if (roomName) {
-      const newSocket = io("https://eva-gun-node.herokuapp.com/", {query: `chat=${roomName}`});
+      const newSocket = io("https://squadz.spatiumstories.xyz/", {query: `chat=${roomName}`});
       setSocket(newSocket);
       return () => newSocket.close();
     }
