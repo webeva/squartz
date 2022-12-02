@@ -143,9 +143,7 @@ export default function Home({ data, result }) {
           }else{
             setVibes(false)
           }
-          if(value.Type == "popupb"){
-            router.push("https://randhir.nftz.me/created")
-          }
+          
         }
         
        
