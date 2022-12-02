@@ -35,7 +35,9 @@
   color: var(--white-color);
   padding: 15px 40px;
   cursor: pointer;
-  margin-left: 29vw;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 .error {
   text-align: center;
@@ -84,4 +86,15 @@
 }
 .options div h1 {
   font-size: 17px;
+}
+.active{
+  background-color: var(--third-background-color);
+}
+.body{
+  width: 100%;
+  height: 100%;
+  padding-bottom: 30px;
+ 
+  position: relative;
+
 }

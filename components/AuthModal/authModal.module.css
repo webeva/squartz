@@ -1,5 +1,8 @@
 .text {
   text-align: center;
+  font-family: "Bebas Neue";
+  line-height: 10px;
+  font-size: 40px;
 }
 .input {
   width: 100%;
@@ -10,6 +13,7 @@
   border: 1px solid black;
   border-radius: 8px;
   font-size: 15px;
+  font-family: "Atkinson Hyperlegible";
 }
 .connect {
   padding: 10px 5px;
@@ -20,14 +24,23 @@
   outline: none;
   margin-top: 10px;
   color: var(--white-color);
-  display: flex;
+  display: inline-block;
   margin: none;
+  margin-left: 15px;
+  font-family: "Atkinson Hyperlegible";
+  font-size: 14px;
 }
 .connect img {
   width: 1.4rem;
   height: 1.4rem;
   vertical-align: middle;
   margin-right: 5px;
+}
+.body{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-bottom: 50px;
 }
 .signup {
   margin-top: 2vh;
@@ -37,7 +50,8 @@
   color: var(--white-color);
   padding: 15px 40px;
   cursor: pointer;
-  margin-left: 13vw;
+  position: absolute;
+  right: 40%;
 }
 .error {
   text-align: center;

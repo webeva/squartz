@@ -20,7 +20,24 @@ class RedisApi {
             return
         }
     }
-    async createNewCommunity(id, name, desc, profile, banner, admin, restriction, channels, deso){
+    async leaveCommunity(id, chatId){
+        if(!id || !chatId){
+            console.log("Cannot leave community")
+            return
+        }
+        try{
+            const response = await axios.post("https://squadz.spatiumstories.xyz/leave-community", {
+                Id: id, 
+                Chat: chatId
+            })
+            return response
+        }catch(error){
+            console.log(error)
+            return
+        }
+    }
+    async createNewCommunity(id, name, desc, profile, banner, admin, restriction, channels, deso, users, gate){
+        
         if(!id || !name || !desc || !profile || !banner || !admin || !restriction){
             console.log("Cannot create community")
             return
@@ -35,7 +52,10 @@ class RedisApi {
                 Admin: admin, 
                 Restriction: restriction,
                 Channels: channels,
-                Deso: deso
+                Deso: deso,
+                Allowed: users,
+                GatingDetails: gate
+
             })
             return response
         }catch(error){

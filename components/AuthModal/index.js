@@ -283,8 +283,7 @@ export default function AuthModal() {
       return;
     }
     if (!uidi) {
-      document.getElementById("error").innerText =
-        "Please login with one of the following!";
+      document.getElementById("error").innerText = "Please login with one of the following!";
       return;
     }
     const uid = SHA256(uidi);
@@ -296,11 +295,12 @@ export default function AuthModal() {
         localStorage.setItem("SquadKeyType", type);
         setShow(false);
         setAuth(true);
-        router.push("/");
+        router.push("/discover");
       });
   }
   return (
     <Modal show={show} hide={() => setShow(false)}>
+      <div className={style.body}>
       {/* Edit inside this componenet and it should
        show up on the auth modal 
        
@@ -359,6 +359,7 @@ export default function AuthModal() {
         Sign up
       </button>
       <p className={style.error} id="error"></p>
+      </div>
     </Modal>
   );
 }

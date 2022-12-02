@@ -34,19 +34,14 @@ export default function Discover({ data }) {
       {data?.map(function (value) {
         return (
           <>
-            <div className={style.design}>
-              <img className={style.profile} src={value.Profile}></img>
+            <div className={style.design} onClick={() => {setShow(true), setData(value.UID);}}>
+              <img className={style.profile} src={value.Profile} alt="Profile"></img>
               <p className={style.text}>
-                {value.Name} {value.Restriction}
+                {value.Name}
+                
               </p>
-              <button
-                className={style.buttom}
-                onClick={() => {
-                  setShow(true), setData(value.UID);
-                }}
-              >
-                Join
-              </button>
+              <p className={style.text2}>{value.Desc}</p>
+              
             </div>
           </>
         );

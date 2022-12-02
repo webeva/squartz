@@ -8,7 +8,23 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   //Return the JSX
   return (
-    <Html>
+    <Html
+      lang="en"
+      dir="ltr">
+        <link rel="shortcut icon" href="/assets/favicon.png" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YFMKYBDJBC"></script>
+        <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YFMKYBDJBC', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
       <Head />
       <body
         style={{

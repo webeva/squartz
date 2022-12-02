@@ -64,8 +64,14 @@ export default function CreateCommunity() {
   }
   async function createNewCommunity() {
     const id = createUID();
-    const response = await redis
-      .createNewCommunity(
+    const channels = [
+      {Name: "Welcome", Type: "free", ReadOnly: true},
+      {Name: "General", Type: "free", ReadOnly: false},
+      {Name: "Rules", Type: "free", ReadOnly: true},
+      {Name: "NFTHolders", Type: "nft", ReadOnly: false}
+    ]
+    const allowedUsers = ""
+    const response = await redis.createNewCommunity(
         id,
         name,
         description,
@@ -73,8 +79,11 @@ export default function CreateCommunity() {
         banner,
         localStorage.getItem("SquadKey"),
         restriction,
-        "§Welcome§General§Rules",
-        localStorage.getItem("deso_user_key")
+        JSON.stringify(channels),
+        localStorage.getItem("deso_user_key"),
+        allowedUsers,
+        ""
+
       )
       .then((res) => {
         console.log(res);
@@ -162,6 +171,7 @@ export default function CreateCommunity() {
 
   return (
     <Modal show={show} hide={() => setShow(false)}>
+      <div className={style.body}>
       {currentPage == 0 ? (
         <>
           <h1 className={style.text}>Create a community</h1>
@@ -221,12 +231,12 @@ export default function CreateCommunity() {
               <h1 className={style.text}>Restriction</h1>
               <div className={style.dropdown}>
                 <div className={style.options}>
-                  <div onClick={() => setRestriction("free")}>
+                  <div className={restriction == "free" ? style.active : "" } onClick={() => setRestriction("free")}>
                     <h1>Free for all</h1>
                     <p>Allow anybody to join your community</p>
                   </div>
-                  <div>
-                    <h1 onClick={() => setRestriction("nft")}>NFT Gated</h1>
+                  <div className={restriction == "nft" ? style.active : "" }  onClick={() => setRestriction("nft")}>
+                    <h1 >NFT Gated</h1>
                     <p>
                       Restrict access to anybody that owns at least 1 one of
                       your NFT
@@ -238,11 +248,12 @@ export default function CreateCommunity() {
           )}
         </>
       )}
-
+      <br></br>
       <button id="next" className={style.next} onClick={() => nextPage()}>
         Next
       </button>
       <p className={style.error}>{error}</p>
+      </div>
     </Modal>
   );
 }

@@ -8,6 +8,7 @@ import NavItem from "../NavItem";
 import RedisApi from "../../pages/api/Redis";
 import { useEffect, useState } from "react";
 
+
 //Export the JSX
 export default function Navbar() {
   const redis = new RedisApi();
@@ -25,6 +26,7 @@ export default function Navbar() {
     <div className={style.menu}>
       {communityList?.length > 0 &&
         communityList?.map(function (value) {
+          
           const { Profile, Name, UID } = JSON.parse(value);
           return <NavItem icon={Profile} text={Name} link={UID} key={UID} />;
         })}

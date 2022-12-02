@@ -35,9 +35,11 @@
   font-size: 16px;
   color: var(--white-color);
   font-weight: bold;
+  
 }
 .span {
   display: inline-block;
+  height: 100%;
 }
 .date {
   display: inline;
@@ -50,13 +52,18 @@
   width: 2.7rem;
   height: 2.7rem;
   margin-right: 10px;
-  display: inline-block;
+ 
   vertical-align: top;
 }
 .messages {
   font-weight: lighter;
   display: block;
-  line-height: 3px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  width: 800px;
+  white-space: pre-line;
+  margin: 0;
+
 }
 .image {
   width: 200px;
@@ -90,10 +97,11 @@
 .inputContainer {
   background-color: var(--secondary-background-color);
   border-radius: 5px;
-  margin-left: 27vw;
+  margin-left: 4vw;
   margin-top: 1vh;
   width: fit-content;
   display: inline-block;
+  
 }
 .sendButton {
   display: inline-block;
@@ -122,14 +130,21 @@
   width: 47vw;
   height: 6vh;
   padding-left: 10px;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+  vertical-align: middle;
+  padding-top: 10px;
+  
+ 
 }
 .input {
   background-color: rgba(48, 52, 69, 255);
   width: 100vw;
-  height: 8vh;
+  height: calc(8vh + 5px);
   position: absolute;
   bottom: 0;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 .topChat {
   position: fixed;
@@ -146,5 +161,22 @@
 .images {
   border-radius: 5px;
   margin-left: 50px;
-  width: 300px;
+  width: 500px;
+}
+.leave{
+  background-color: rgb(224, 83, 83);
+  color: var(--white-color);
+  width: 100px;
+  height: 6vh;
+  margin-left: 18vw;
+  
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+@media all and (max-width:800px) {
+  .messageContainer{
+   
+    margin-left: calc(30vw + 4.8rem);
+  }
 }

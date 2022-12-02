@@ -32,6 +32,9 @@ export default function Home({ data, result }) {
   const [emojishow, setEmojiShow] = useState("none");
   const [path, setPath] = useState();
   const [image, setImage] = useState();
+  const [state, setState] = useState(false)
+  const [resc, setResc] = useState(true)
+  const [nft, setNft] = useState()
   const inputFile = useRef(null);
 
 
@@ -48,6 +51,7 @@ export default function Home({ data, result }) {
 
   async function sendMessage() {
     const message = document.getElementById("sendInput").value;
+<<<<<<< HEAD
     const channel = router.query.channel;
     const user = localStorage.getItem("SquadKey");
     const data = await fetch(
@@ -57,20 +61,23 @@ export default function Home({ data, result }) {
       .then((data) => {
         return data;
       });
+=======
+    if(message && state == false){
+      document.getElementById("sendInput").value = "";
+      changeSize()
+      const channel = router.query.channel;
+      const user = localStorage.getItem("SquadKey");
+      const data = await fetch("https://squadz.spatiumstories.xyz/get-messages/" + user).then((res) => res.json()).then((data) => {return data;});
+      appendMessage(message, roomName, channel, image, data.Name, data.Profile);
+      socket.emit("send-chat-message",roomName,message,channel,image,user,data.Name,data.Profile);
+      
+      setImage();
+>>>>>>> 274610cc4fef0842d8825c69cc0fa3097a3ed38e
 
-    appendMessage(message, roomName, channel, image, data.Name, data.Profile);
-    socket.emit(
-      "send-chat-message",
-      roomName,
-      message,
-      channel,
-      image,
-      user,
-      data.Name,
-      data.Profile
-    );
-    document.getElementById("sendInput").value = "";
-    setImage();
+     
+    }else{
+      alert("Cannot send message")
+    }
   }
 
   function appendMessage(message, roomName, channel, image, name, profile) {
@@ -104,10 +111,72 @@ export default function Home({ data, result }) {
     setRoomName(router.query.id);
     setMessages(data);
     getPath(router.query.id);
+    setNft()
   }, [router]);
   async function getPath(id) {
+    
     const name = await redis.getCommunity("$@community" + id);
     setPath(`${name.Name} > ${router.query.channel}`);
+    const includes = name.Allowed.split("§").includes(localStorage.getItem("SquadKey"))
+    if(name.Admin == localStorage.getItem("SquadKey")) return
+    if(includes == true) return
+
+      const data = JSON.parse(name.Channels)
+      data.map(function(value){
+        if(value.Name == router.query.channel){
+          setState(value.ReadOnly)
+          if(value.ReadOnly == true){
+            setState(true)
+            document.getElementById("sendInput").placeholder = "You do not have permission to talk in this chat"
+          }else{
+            setState(false)
+            document.getElementById("sendInput").placeholder = "Click here to start chatting"
+          }
+          if(value.Type == "admin"){
+           
+            router.push(`/u/${router.query.id}?channel=Welcome`)
+          }
+          if(value.Type == "nft"){
+            
+            checkIfOwns(name.GatingDetails, value.ReadOnly, name.Deso)
+          
+
+          }
+        }
+        
+       
+      })
+
+    
+    
+  }
+  async function checkIfOwns(id, own, adminId){
+    let owns = false
+   
+    const user = localStorage.getItem("deso_user_key")
+    const nfts = await deso.getNFTForUser(user)
+    Object.values(nfts['data']['NFTsMap']).forEach((nft) => {
+      if (nft['PostEntryResponse']['PosterPublicKeyBase58Check'] === adminId) {
+        owns = true;
+      }
+    });
+    if(owns == true){
+     
+      setResc(true)
+      if(own == true){
+        setState(true)
+        document.getElementById("sendInput").placeholder = "You do not have permission to talk in this chat"
+      }else{
+        setState(false)
+        document.getElementById("sendInput").placeholder = "Click here to start chatting"
+      }
+      return
+    }else{
+      setResc(false)
+      setNft("Buy")
+      document.getElementById("sendInput").placeholder = `To join this chat buy at least one NFT.`
+      setState(true)
+    }
   }
   function showemoji() {
     if (document.getElementById("emojiPicker").style.display == "none") {
@@ -164,6 +233,7 @@ export default function Home({ data, result }) {
   }
   function checkIfEnter(e) {
     if (e.charCode == 13) {
+      e.preventDefault()
       sendMessage();
     }
   }
@@ -186,6 +256,21 @@ export default function Home({ data, result }) {
     const link = await deso.uploadImage(user, JWT, result);
     setImage(link.ImageURL);
   }
+  async function leave(){
+    const uid = router.query.id
+    const response = await redis.leaveCommunity(localStorage.getItem("SquadKey"), uid )
+    router.push("/")
+  }
+  function changeSize(){
+    var textarea = document.getElementById("sendInput");
+    var input = document.getElementById("input")
+    textarea.style.height = "";
+    input.style.height = (textarea.scrollHeight + 15) + "px"
+    textarea.style.height = textarea.scrollHeight + "px"
+    if(textarea.value == ""){
+      textarea.style.height = textarea.scrollHeight + "px"
+    }
+  }
 
   return (
     <>
@@ -205,37 +290,45 @@ export default function Home({ data, result }) {
         ref={inputFile}
         onChange={changeHandler}
         style={{ display: "none" }}
+        
       />
-
+      
       <div id="messageContainer" className={style.messageContainer}>
-        <header className={style.topChat}>{path}</header>
+        <header className={style.topChat}>
+          {path}
+          
+          </header>
+        
         {messages?.length > 0 &&
           messages.map(function (element, index) {
-            return (
-              <div className={style.message} key={index}>
-                <img
-                  className={style.profile}
-                  src={result[index] ? result[index].Profile : element.Profile}
-                  alt="Profile picture"
-                ></img>
-
-                <span className={style.span}>
-                  <p className={style.name}>
-                    {result[index] ? result[index].Name : element.Name}{" "}
-                  </p>
-                  <p className={style.date}>{timeSince(element.timestamp)}</p>
-                  <p className={style.messages}>{element.message}</p>
-                </span>
-                <br></br>
-                {element.images && (
+            if(resc == true){
+              return (
+                <div className={style.message} key={index}>
                   <img
-                    src={element.images}
-                    className={style.images}
-                    alt="Image"
+                    className={style.profile}
+                    src={result[index] ? result[index].Profile : element.Profile}
+                    alt="Profile picture"
                   ></img>
-                )}
-              </div>
-            );
+  
+                  <span className={style.span}>
+                    <p className={style.name}>
+                      {result[index] ? result[index].Name : element.Name}{" "}
+                    </p>
+                    <p className={style.date}>{timeSince(element.timestamp)}</p>
+                    <p className={style.messages}>{element.message}</p>
+                  </span>
+                  <br></br>
+                  {element.images && (
+                    <img
+                      src={element.images}
+                      className={style.images}
+                      alt="Image"
+                    ></img>
+                  )}
+                </div>
+              );
+            }
+            
           })}
       </div>
 
@@ -249,14 +342,19 @@ export default function Home({ data, result }) {
           </>
         )}
       </div>
-      <div className={style.input}>
+      
+      <div id="input" className={style.input}>
+      <button className={style.leave} onClick={()=>leave()}>Leave</button>
         <div className={style.inputContainer}>
-          <input
+          <textarea
             onKeyPress={(e) => checkIfEnter(e)}
             className={style.messageInput}
             id="sendInput"
             placeholder="Click here to start chatting"
             type="text"
+            readOnly={state == false ? false : true}
+            onInput={()=>changeSize()}
+           
           />
         </div>
         <button
@@ -281,13 +379,18 @@ export default function Home({ data, result }) {
             alt="Image"
           ></img>
         </button>
-        <button
+        {state == false &&
+          <button
           className={style.sendButton}
           id="sendButton"
           onClick={() => sendMessage()}
         >
           Send
         </button>
+}
+        
+
+        
       </div>
     </>
   );

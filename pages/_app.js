@@ -35,26 +35,30 @@ function App({ Component, pageProps }) {
   /* When they first arrive on the site check if 
   they are logged in or not. If so reroute them to 
   the main page */
-
-  useEffect(() => {
+  useEffect(()=>{
     const user = localStorage.getItem("SquadKey");
+    if (user) {
+      //The user is logged in send them to the main page
+      setAuth(true);
+    } else {
+      //The user is not logged in send them to the home page.
+      if (router.pathname == "/home") {
+        router.push("/home");
+      } else if (router.pathname == "/discover") {
+        router.push("/discover");
+      } else {
+        router.push("/home");
+      }
+
+      setAuth(false);
+    }
+  }, [])
+  useEffect(() => {
+    
     //Small delay to allow for the loading screen to load
     setTimeout(() => {
-      if (user) {
-        //The user is logged in send them to the main page
-        setAuth(true);
-      } else {
-        //The user is not logged in send them to the home page.
-        if (router.pathname == "/home") {
-          router.push("/home");
-        } else if (router.pathname == "/discover") {
-          router.push("/discover");
-        } else {
-          router.push("/home");
-        }
-
-        setAuth(false);
-      }
+      
+      
     }, 1000);
   }, []);
 
@@ -65,6 +69,7 @@ function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Squadz</title>
+        
       </Head>
       <AuthValue>
         <ModalState>
@@ -75,7 +80,7 @@ function App({ Component, pageProps }) {
               <SocketProvider id={roomName}>
                 {auth == "loading" ? (
                   <div className="loading">
-                    <img src="/assets/image/logo.png"></img>
+                    <img src="/assets/image/logo.png" alt="Loading"></img>
                   </div>
                 ) : (
                   <div></div>
