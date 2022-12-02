@@ -24,7 +24,7 @@ const ModalState = ({ children }) => {
         join: [community, setCommunity], //Curent state of join community modal
         current: [currentCommunity, setCurrentCommunity], //Current community (for discovery )
         vibe: [vibe, setVibe], 
-        vibeId: [vibeId, setVibeId()]
+        vibeId: [vibeId, setVibeId]
       }}
     >
       {children}

@@ -8,7 +8,7 @@ export default function VibeModal() {
     
   return (
     <Modal show={vibeshow} hide={()=> setVibe(false)}>
-        <iframe id="vibe" title="View Vibehut Room" style={{borderWidth: "0px", maxWidth: "500px", height: "250px", width: "100%"}} src="https://vibehut.io/embed/rooms/638a144a0e9a3e0015387e28"></iframe>
+        <iframe id="vibe" title="View Vibehut Room" style={{borderWidth: "0px", maxWidth:"500px", width: "100%", height: "500px"}} src="https://vibehut.io/call?roomKey=638a144a0e9a3e0015387e28"></iframe>
     </Modal>
   )
 }
