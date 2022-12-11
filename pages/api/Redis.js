@@ -54,7 +54,8 @@ class RedisApi {
                 Channels: channels,
                 Deso: deso,
                 Allowed: users,
-                GatingDetails: gate
+                GatingDetails: gate,
+                Users: admin,
 
             })
             return response

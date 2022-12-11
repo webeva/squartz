@@ -49,6 +49,7 @@ export default function Home({ data, result }) {
   useEffect(() => {
     if (socket === undefined) return; //If message is undefined return
     socket.on("chat-message", (data) => {
+      //Notifications 
       //Check if the message was sent on this channel
       if (JSON.parse(data).channel_id == router.query.channel) {
         setMessages((messages) => [...messages, JSON.parse(data)]);
